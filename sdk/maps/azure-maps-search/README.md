@@ -81,7 +81,24 @@ See [API design][design] for general introduction on design and key concepts on 
 ## Examples
 Search Address
 ```java com.azure.maps.search.sync.search_address
+// simple
+MapsCommon.print(client.searchAddress(
+    new SearchAddressOptions("15127 NE 24th Street, Redmond, WA 98052")));
 
+// options
+MapsCommon.print(client.searchAddress(
+    new SearchAddressOptions("1 Main Street")
+        .setCoordinates(new GeoPosition(-74.011454, 40.706270))
+        .setRadiusInMeters(40000)
+        .setTop(5)));
+
+// complete
+MapsCommon.print(client.searchAddressWithResponse(
+    new SearchAddressOptions("1 Main Street")
+        .setCoordinates(new GeoPosition(-74.011454, 40.706270))
+        .setRadiusInMeters(40000)
+        .setTop(5), null).getStatusCode());
+```
 
 ## Troubleshooting
 
