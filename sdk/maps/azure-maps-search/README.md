@@ -80,7 +80,7 @@ See [API design][design] for general introduction on design and key concepts on 
 
 ## Examples
 Search Address
-"```com.azure.maps.search.sync.search_address```
+```com.azure.maps.search.sync.search_address
 
 
 ## Troubleshooting
