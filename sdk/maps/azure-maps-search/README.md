@@ -79,7 +79,8 @@ See [Authentication][authenticate] for more options.
 See [API design][design] for general introduction on design and key concepts on Azure Management Libraries.
 
 ## Examples
-
+Search Address
+```com.azure.maps.search.sync.search_address```
 
 
 ## Troubleshooting
