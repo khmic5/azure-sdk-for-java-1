@@ -18,7 +18,7 @@
   <packaging>jar</packaging>
 
   <name>Azure Maps SDK Search client library</name>
-  <description>This package contains the ${project.name}. For documentation on how to use this package, please see https://aka.ms/azsdk/java/mgmt. Package tag 1.0-preview.</description>
+  <description>This package contains the MicrosoftAzure SDK for Search SDK. For documentation on how to use this package, please see https://docs.microsoft.com/en-us/rest/api/maps/search. Package tag 1.0-preview.</description>
   <url>https://github.com/Azure/azure-sdk-for-java</url>
 
   <licenses>

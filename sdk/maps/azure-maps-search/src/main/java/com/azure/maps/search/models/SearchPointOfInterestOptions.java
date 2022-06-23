@@ -18,6 +18,14 @@ public final class SearchPointOfInterestOptions extends BaseSearchPointOfInteres
     /**
      * Builds fuzzy search options with query string and coordinates.
      * @param query The query to be used to search for points of interest.
+     */
+    public SearchPointOfInterestOptions(String query) {
+        this.query = query;
+    }
+
+    /**
+     * Builds fuzzy search options with query string and coordinates.
+     * @param query The query to be used to search for points of interest.
      * @param coordinates The {@link GeoPosition} coordinates to be searched.
      */
     public SearchPointOfInterestOptions(String query, GeoPosition coordinates) {

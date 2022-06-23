@@ -98,6 +98,7 @@ public class BuilderSamples {
         /* Stand-alone, one-shot operations */
         // Search address -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-address
+        // BEGIN: com.azure.maps.search.sync.search_address
         System.out.println("Search Address:");
 
         // simple
@@ -117,6 +118,8 @@ public class BuilderSamples {
                 .setCoordinates(new GeoPosition(-74.011454, 40.706270))
                 .setRadiusInMeters(40000)
                 .setTop(5), null).getStatusCode());
+
+        // END: com.azure.maps.search.sync.search_address
 
         // Search address reverse -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-address-reverse

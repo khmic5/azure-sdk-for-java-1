@@ -158,6 +158,13 @@ public class TestUtils {
         return obj;
     }
 
+    static SearchAddressResult getExpectedSearchInsideGeometryCollection() throws IOException {
+        InputStream is = ClassLoader.getSystemResourceAsStream("searchinsidegeocollectionresult.json");
+        byte[] data = null;
+        data = toByteArray(is);
+        return getSearchAddressResult(data);
+    }
+
     static SearchAddressResult getExpectedSearchInsideGeometry() throws IOException {
         InputStream is = ClassLoader.getSystemResourceAsStream("searchinsidegeometryresult.json");
         byte[] data = null;

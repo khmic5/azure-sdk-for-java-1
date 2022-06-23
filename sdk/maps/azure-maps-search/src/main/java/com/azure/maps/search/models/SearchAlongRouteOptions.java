@@ -20,6 +20,16 @@ public final class SearchAlongRouteOptions extends BaseSearchGeometryOptions<Sea
      * Create search along route options.
      * @param query the search query
      * @param maxDetourTime the maximum detour time allowed
+     */
+    public SearchAlongRouteOptions(String query, int maxDetourTime) {
+        this.maxDetourTime = maxDetourTime;
+        this.setQuery(query);
+    }
+
+    /**
+     * Create search along route options.
+     * @param query the search query
+     * @param maxDetourTime the maximum detour time allowed
      * @param route the {@code GeoLineString} geometry representing the route
      */
     public SearchAlongRouteOptions(String query, int maxDetourTime, GeoLineString route) {

@@ -31,7 +31,7 @@ public final class Polygon {
      *
      * @return the providerID value.
      */
-    public String getProviderID() {
+    public String getProviderId() {
         return this.providerID;
     }
 

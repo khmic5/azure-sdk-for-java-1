@@ -416,6 +416,20 @@ public class MapsSearchClientTest extends MapsSearchClientTestBase {
         validateSearchInsideGeometry(expectedResult, actualResult);
     }
 
+    // Test search inside geometry with Geocollection
+    @ParameterizedTest(name = DISPLAY_NAME_WITH_ARGUMENTS)
+    @MethodSource("com.azure.maps.search.TestUtils#getTestParameters")
+    public void testSearchInsideGeometryGeoCollection(HttpClient httpClient, MapsSearchServiceVersion serviceVersion)
+        throws IOException {
+        client = getMapsSearchClient(httpClient, serviceVersion);
+        File file = new File("src/main/resources/geocollection.json");
+        GeoObject obj = TestUtils.getGeoObject(file);
+        SearchAddressResult actualResult = client.searchInsideGeometry(
+                new SearchInsideGeometryOptions("coffee", obj));
+        SearchAddressResult expectedResult = TestUtils.getExpectedSearchInsideGeometryCollection();
+        validateSearchInsideGeometry(expectedResult, actualResult);
+    } 
+
     // Test search inside geometry with response
     // Case 1: 200
     @ParameterizedTest(name = DISPLAY_NAME_WITH_ARGUMENTS)

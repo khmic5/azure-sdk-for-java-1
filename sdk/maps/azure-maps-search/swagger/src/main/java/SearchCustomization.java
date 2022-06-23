@@ -41,6 +41,9 @@ public class SearchCustomization extends Customization {
 
         // customizePolygon
         customizePolygon(models);
+
+        // customize error repsponse exception
+        customizeErrorResponseException(models);
     }
 
     // Customizes the Address class by changing the type of BoundingBox
@@ -50,6 +53,10 @@ public class SearchCustomization extends Customization {
         methodCustomization.setReturnType("GeoBoundingBox",
             "com.azure.maps.search.implementation.helpers.Utility.toGeoBoundingBox(returnValue)");
         classCustomization.addImports("com.azure.core.models.GeoBoundingBox");
+
+        // getCountryCodeISO3
+        MethodCustomization getCountryCodeIso3NameCustomization = classCustomization.getMethod("getCountryCodeISO3");
+        MethodCustomization getCountryCodeIso3Customization = getCountryCodeIso3NameCustomization.rename("getCountryCodeIso3");
     }
 
 
@@ -174,5 +181,28 @@ public class SearchCustomization extends Customization {
 
         classCustomization.removeMethod("setGeometryData");
         classCustomization.addImports("com.azure.core.models.GeoObject");
+
+        // getProviderId
+        MethodCustomization providerIdNameCustomization = classCustomization.getMethod("getProviderID");
+        MethodCustomization providerIdCustomization = providerIdNameCustomization.rename("getProviderId");
+    }
+
+    // Customizes the ErrorResponseException class
+    private void customizeErrorResponseException(PackageCustomization models) {
+        final String getValueMethod =
+            "/** " +
+            "* Gets the deserialized response value." +
+            "*/" +
+            "@Override " +
+            "public ResponseError getValue() {" +
+            "   return (ResponseError) super.getValue();" +
+            "}";
+        ClassCustomization classCustomization = models.getClass("ErrorResponseException");
+        MethodCustomization mc = classCustomization.getMethod("getValue");
+        mc.removeAnnotation("@Override");
+        classCustomization.removeMethod("getValue");
+        classCustomization.addMethod(getValueMethod, Arrays.asList("com.azure.core.models.ResponseError"));
+        classCustomization.getConstructor("ErrorResponseException(String message, HttpResponse response, ErrorResponse value)")
+            .replaceParameters("String message, HttpResponse response, ResponseError value");
     }
 }

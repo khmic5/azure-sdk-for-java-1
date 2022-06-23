@@ -295,7 +295,7 @@ public final class Address {
      *
      * @return the countryCodeISO3 value.
      */
-    public String getCountryCodeISO3() {
+    public String getCountryCodeIso3() {
         return this.countryCodeISO3;
     }
 

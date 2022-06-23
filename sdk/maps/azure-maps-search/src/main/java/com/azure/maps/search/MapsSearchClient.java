@@ -10,6 +10,7 @@ import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.http.rest.Response;
+import com.azure.core.models.GeoPosition;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.maps.search.models.BatchReverseSearchResult;
@@ -109,6 +110,20 @@ public final class MapsSearchClient {
     /**
      * Fuzzy Search
      *
+     * @param query the query string used in the search.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Fuzzy Search call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult fuzzySearch(String query) {
+        return this.asyncClient.fuzzySearch(new FuzzySearchOptions(query)).block();
+    }
+
+    /**
+     * Fuzzy Search
+     *
      * @param options {@link FuzzySearchOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -133,6 +148,20 @@ public final class MapsSearchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SearchAddressResult searchPointOfInterest(SearchPointOfInterestOptions options) {
         return this.asyncClient.searchPointOfInterest(options).block();
+    }
+
+     /**
+     * Search Point of Interest
+     *
+     * @param query The query to be used to search for points of interest.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Point of Interest call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult searchPointOfInterest(String query) {
+        return this.asyncClient.searchPointOfInterest(new SearchPointOfInterestOptions(query)).block();
     }
 
     /**
@@ -168,6 +197,20 @@ public final class MapsSearchClient {
     /**
      * Search Nearby Point of Interest
      *
+     * @param query A pair of coordinates for query.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Nearby Point of Interest call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult searchNearbyPointOfInterest(GeoPosition query) {
+        return this.asyncClient.searchNearbyPointOfInterest(new SearchNearbyPointsOfInterestOptions(query)).block();
+    }
+
+    /**
+     * Search Nearby Point of Interest
+     *
      * @param options {@link SearchNearbyPointsOfInterestOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -193,6 +236,20 @@ public final class MapsSearchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SearchAddressResult searchPointOfInterestCategory(SearchPointOfInterestCategoryOptions options) {
         return this.asyncClient.searchPointOfInterestCategory(options).block();
+    }
+
+    /**
+     * Search Point of Interest per Category
+     *
+     * @param query The query to be used to search for points of interest.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Point of Interest per Category calls.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult searchPointOfInterestCategory(String query) {
+        return this.asyncClient.searchPointOfInterestCategory(new SearchPointOfInterestCategoryOptions(query)).block();
     }
 
     /**
@@ -251,6 +308,31 @@ public final class MapsSearchClient {
 
     /**
      * Search Address
+     * 
+     * <!-- src_embed com.azure.maps.search.sync.search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;client.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;15127 NE 24th Street, Redmond, WA 98052&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;client.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;client.searchAddressWithResponse&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;, null&#41;.getStatusCode&#40;&#41;&#41;;
+     *
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_address -->
      *
      * @param options a {@link SearchAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -261,6 +343,20 @@ public final class MapsSearchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SearchAddressResult searchAddress(SearchAddressOptions options) {
         return this.asyncClient.searchAddress(options).block();
+    }
+
+    /**
+     * Search Address
+     *
+     * @param query the query string used in the fuzzy search.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult searchAddress(String query) {
+        return this.asyncClient.searchAddress(new SearchAddressOptions(query)).block();
     }
 
     /**
@@ -296,6 +392,20 @@ public final class MapsSearchClient {
     /**
      * Reverse Address Search
      *
+     * @param query The applicable query as a pair of coordinates.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Reverse Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ReverseSearchAddressResult reverseSearchAddress(GeoPosition query) {
+        return this.asyncClient.reverseSearchAddress(new ReverseSearchAddressOptions(query)).block();
+    }
+
+    /**
+     * Reverse Address Search
+     *
      * @param options a {@link ReverseSearchAddressOptions} representing the search parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -322,6 +432,21 @@ public final class MapsSearchClient {
     public ReverseSearchCrossStreetAddressResult reverseSearchCrossStreetAddress(
             ReverseSearchCrossStreetAddressOptions options) {
         return this.asyncClient.reverseSearchCrossStreetAddress(options).block();
+    }
+
+    /**
+     * Reverse Address Search to a Cross Street
+     *
+     * @param query with a pair of coordinates..
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Reverse Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ReverseSearchCrossStreetAddressResult reverseSearchCrossStreetAddress(
+            GeoPosition query) {
+        return this.asyncClient.reverseSearchCrossStreetAddress(new ReverseSearchCrossStreetAddressOptions(query)).block();
     }
 
     /**
@@ -359,6 +484,20 @@ public final class MapsSearchClient {
     /**
      * Structured Address Search
      *
+     * @param countryCode the country code for query.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Reverse Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult searchStructuredAddress(String countryCode) {
+        return this.asyncClient.searchStructuredAddress(new StructuredAddress(countryCode), null).block();
+    }
+
+    /**
+     * Structured Address Search
+     *
      * @param address a {@link StructuredAddress} to be searched by the API.
      * @param options a {@link SearchStructuredAddressOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -390,6 +529,20 @@ public final class MapsSearchClient {
     /**
      * Search Inside Geometry
      *
+     * @param query query string
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Inside Geometry call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult searchInsideGeometry(String query) {
+        return this.asyncClient.searchInsideGeometry(new SearchInsideGeometryOptions(query)).block();
+    }
+
+    /**
+     * Search Inside Geometry
+     *
      * @param options a {@link SearchInsideGeometryOptions} representing the search parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -415,6 +568,21 @@ public final class MapsSearchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SearchAddressResult searchAlongRoute(SearchAlongRouteOptions options) {
         return this.asyncClient.searchAlongRoute(options).block();
+    }
+
+    /**
+     * Search Along Route
+     *
+     * @param query the search query
+     * @param maxDetourTime the maximum detour time allowed
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Along Route call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SearchAddressResult searchAlongRoute(String query, int maxDetourTime) {
+        return this.asyncClient.searchAlongRoute(new SearchAlongRouteOptions(query, maxDetourTime)).block();
     }
 
     /**

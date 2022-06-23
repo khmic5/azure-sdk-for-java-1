@@ -161,6 +161,23 @@ public final class MapsSearchAsyncClient {
     /**
      * Fuzzy Search
      *
+     * @param query the query string used in the search.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Fuzzy Search call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> fuzzySearch(String query) {
+        Mono<Response<SearchAddressResult>> result = this.fuzzySearchWithResponse(new FuzzySearchOptions(query), null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Fuzzy Search
+     *
      * @param options {@link FuzzySearchOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -222,6 +239,23 @@ public final class MapsSearchAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SearchAddressResult> searchPointOfInterest(SearchPointOfInterestOptions options) {
         Mono<Response<SearchAddressResult>> result = this.searchPointOfInterestWithResponse(options, null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Search Point of Interest
+     *
+     * @param query The query to be used to search for points of interest.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Point of Interest call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> searchPointOfInterest(String query) {
+        Mono<Response<SearchAddressResult>> result = this.searchPointOfInterestWithResponse(new SearchPointOfInterestOptions(query), null);
         return result.flatMap(response -> {
             return Mono.just(response.getValue());
         });
@@ -297,6 +331,24 @@ public final class MapsSearchAsyncClient {
     /**
      * Search Nearby Point of Interest
      *
+     * @param query A pair of coordinates for query.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Nearby Point of Interest call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> searchNearbyPointOfInterest(
+            GeoPosition query) {
+        Mono<Response<SearchAddressResult>> result = this.searchNearbyPointOfInterestWithResponse(new SearchNearbyPointsOfInterestOptions(query), null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Search Nearby Point of Interest
+     *
      * @param options {@link SearchNearbyPointsOfInterestOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -354,6 +406,23 @@ public final class MapsSearchAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SearchAddressResult> searchPointOfInterestCategory(SearchPointOfInterestCategoryOptions options) {
         Mono<Response<SearchAddressResult>> result = this.searchPointOfInterestCategoryWithResponse(options, null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Search Point of Interest per Category
+     *
+     * @param query The query to be used to search for points of interest.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Point of Interest per Category calls.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> searchPointOfInterestCategory(String query) {
+        Mono<Response<SearchAddressResult>> result = this.searchPointOfInterestCategoryWithResponse(new SearchPointOfInterestCategoryOptions(query), null);
         return result.flatMap(response -> {
             return Mono.just(response.getValue());
         });
@@ -486,6 +555,23 @@ public final class MapsSearchAsyncClient {
     /**
      * Search Address
      *
+     * @param query the query string used in the fuzzy search.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> searchAddress(String query) {
+        Mono<Response<SearchAddressResult>> result = this.searchAddressWithResponse(new SearchAddressOptions(query), null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Search Address
+     *
      * @param options a {@link SearchAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -540,6 +626,23 @@ public final class MapsSearchAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ReverseSearchAddressResult> reverseSearchAddress(ReverseSearchAddressOptions options) {
         Mono<Response<ReverseSearchAddressResult>> result = this.reverseSearchAddressWithResponse(options, null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Reverse Address Search
+     *
+     * @param query The applicable query as a pair of coordinates.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Reverse Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ReverseSearchAddressResult> reverseSearchAddress(GeoPosition query) {
+        Mono<Response<ReverseSearchAddressResult>> result = this.reverseSearchAddressWithResponse(new ReverseSearchAddressOptions(query), null);
         return result.flatMap(response -> {
             return Mono.just(response.getValue());
         });
@@ -612,6 +715,25 @@ public final class MapsSearchAsyncClient {
     /**
      * Reverse Address Search to a Cross Street
      *
+     * @param query with a pair of coordinates.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Reverse Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ReverseSearchCrossStreetAddressResult> reverseSearchCrossStreetAddress(
+            GeoPosition query) {
+        Mono<Response<ReverseSearchCrossStreetAddressResult>> result =
+            this.reverseSearchCrossStreetAddressWithResponse(new ReverseSearchCrossStreetAddressOptions(query), null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Reverse Address Search to a Cross Street
+     *
      * @param options a {@link ReverseSearchCrossStreetAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -663,6 +785,23 @@ public final class MapsSearchAsyncClient {
             SearchStructuredAddressOptions options) {
         Mono<Response<SearchAddressResult>> result = this.searchStructuredAddressWithResponse(address,
             options, null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Structured Address Search
+     *
+     * @param countryCode the country code for query.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Reverse Search Address call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> searchStructuredAddress(String countryCode) {
+        Mono<Response<SearchAddressResult>> result = this.searchStructuredAddressWithResponse(new StructuredAddress(countryCode), null);
         return result.flatMap(response -> {
             return Mono.just(response.getValue());
         });
@@ -741,6 +880,23 @@ public final class MapsSearchAsyncClient {
     /**
      * Search Inside Geometry
      *
+     * @param query query string
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Inside Geometry call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> searchInsideGeometry(String query) {
+        Mono<Response<SearchAddressResult>> result = this.searchInsideGeometryWithResponse(new SearchInsideGeometryOptions(query), null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Search Inside Geometry
+     *
      * @param options a {@link SearchInsideGeometryOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -793,6 +949,24 @@ public final class MapsSearchAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SearchAddressResult> searchAlongRoute(SearchAlongRouteOptions options) {
         Mono<Response<SearchAddressResult>> result = this.searchAlongRouteWithResponse(options, null);
+        return result.flatMap(response -> {
+            return Mono.just(response.getValue());
+        });
+    }
+
+    /**
+     * Search Along Route
+     *
+     * @param query the search query
+     * @param maxDetourTime the maximum detour time allowed
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this object is returned from a successful Search Along Route call.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SearchAddressResult> searchAlongRoute(String query, int maxDetourTime) {
+        Mono<Response<SearchAddressResult>> result = this.searchAlongRouteWithResponse(new SearchAlongRouteOptions(query, maxDetourTime), null);
         return result.flatMap(response -> {
             return Mono.just(response.getValue());
         });

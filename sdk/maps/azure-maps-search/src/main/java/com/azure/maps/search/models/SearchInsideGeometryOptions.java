@@ -19,6 +19,14 @@ public final class SearchInsideGeometryOptions extends BaseSearchGeometryOptions
     /**
      * Create a new options object with query and Geometry.
      * @param query query string
+     */
+    public SearchInsideGeometryOptions(String query) {
+        this.setQuery(query);
+    }
+
+    /**
+     * Create a new options object with query and Geometry.
+     * @param query query string
      * @param geometry the {@code GeoObject} geometry inside which the search will be performed.
      */
     public SearchInsideGeometryOptions(String query, GeoObject geometry) {

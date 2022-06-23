@@ -117,8 +117,8 @@ public class MapsSearchClientTestBase extends TestBase {
 
     static void validateGetPolygons(List<Polygon> expected, List<Polygon> actual) {
         assertEquals(expected.size(), actual.size());
-        List<String> ids = Arrays.asList(actual.get(0).getProviderID(), actual.get(1).getProviderID());
-        assertTrue(ids.contains(expected.get(0).getProviderID()));
+        List<String> ids = Arrays.asList(actual.get(0).getProviderId(), actual.get(1).getProviderId());
+        assertTrue(ids.contains(expected.get(0).getProviderId()));
     }
 
     static void validateGetPolygonsWithResponse(List<Polygon> expected, int expectedStatusCode,
