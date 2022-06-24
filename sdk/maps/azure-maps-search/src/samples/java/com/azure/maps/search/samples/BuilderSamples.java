@@ -118,11 +118,11 @@ public class BuilderSamples {
                 .setCoordinates(new GeoPosition(-74.011454, 40.706270))
                 .setRadiusInMeters(40000)
                 .setTop(5), null).getStatusCode());
-
         // END: com.azure.maps.search.sync.search_address
 
         // Search address reverse -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-address-reverse
+        // BEGIN: com.azure.maps.search.sync.reverse_search_address
         System.out.println("Search Address Reverse:");
 
         // simple
@@ -145,9 +145,11 @@ public class BuilderSamples {
                 .setIncludeSpeedLimit(true)
                 .setEntityType(GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION),
                 null).getStatusCode());
+        // END: com.azure.maps.search.sync.reverse_search_address
 
         // Search address reverse cross street -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-address-reverse-cross-street
+        // BEGIN: com.azure.maps.search.sync.search_reverse_cross_street_address
         System.out.println("Revere Search Cross Street Address:");
 
         // options
@@ -166,9 +168,11 @@ public class BuilderSamples {
                 .setTop(2)
                 .setHeading(5),
             null).getStatusCode());
+        // END: com.azure.maps.search.sync.search_reverse_cross_street_address
 
         // Search address structured -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-address-structured
+        // BEGIN: com.azure.maps.search.sync.search_structured_address
         System.out.println("Search Address Structured:");
 
         // simple
@@ -190,9 +194,11 @@ public class BuilderSamples {
                     .setTop(2)
                     .setRadiusInMeters(1000),
             null).getStatusCode());
+        // END: com.azure.maps.search.sync.search_structured_address
 
         // Search fuzzy -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-fuzzy
+        // BEGIN: com.azure.maps.search.sync.fuzzy_search
         System.out.println("Search Fuzzy:");
 
         // simple
@@ -210,9 +216,11 @@ public class BuilderSamples {
                 .setTop(5), null);
         MapsCommon.print(response.getStatusCode());
         String id = response.getValue().getResults().get(0).getDataSource().getGeometry().getId();
+        // END: com.azure.maps.search.sync.fuzzy_search
 
         // Get polygon -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-polygon
+        // BEGIN: com.azure.maps.search.sync.get_polygon
         List<String> ids = results.getResults().stream()
             .filter(item -> item.getDataSource() != null && item.getDataSource().getGeometry() != null)
             .map(item -> item.getDataSource().getGeometry().getId())
@@ -225,9 +233,11 @@ public class BuilderSamples {
             MapsCommon.print(client.getPolygons(ids));
             MapsCommon.print(client.getPolygonsWithResponse(ids, null).getValue().getClass());
         }
+        // END: com.azure.maps.search.sync.get_polygon
 
         // Search POI -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-poi
+        // BEGIN: com.azure.maps.search.sync.get_search_poi
         System.out.println("Search Points of Interest:");
 
         // coordinates
@@ -246,9 +256,11 @@ public class BuilderSamples {
                 .setTop(10)
                 .setOperatingHours(OperatingHoursRange.NEXT_SEVEN_DAYS),
             null).getStatusCode());
+        // END: com.azure.maps.search.sync.get_search_poi
 
         // Search nearby -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-nearby
+        // BEGIN: com.azure.maps.search.sync.search_nearby
         System.out.println("Search Nearby:");
 
         // options
@@ -263,9 +275,11 @@ public class BuilderSamples {
                 .setCountryFilter(Arrays.asList("US"))
                 .setTop(10),
             null).getStatusCode());
+        // END: com.azure.maps.search.sync.search_nearby
 
         // Search POI Category -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-poi-category
+        // BEGIN: com.azure.maps.search.sync.search_poi_category
         System.out.println("Get Point of Interest Category:");
 
         // complete - search for italian restaurant in NYC
@@ -280,17 +294,21 @@ public class BuilderSamples {
                 .setCategoryFilter(Arrays.asList(7315))
                 .setTop(3),
             null).getStatusCode());
+        // END: com.azure.maps.search.sync.search_poi_category
 
         // Get POI Category Tree -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/get-search-poi-category-tree-preview
         // client.getSearchPoiCategoryTreePreviewWithResponse() offers a complete
         // version including more parameters and
         // the underlying HttpResponse object.
+        // BEGIN: com.azure.maps.search.sync.search_poi_category_tree
         System.out.println("Get Search POI Category Tree:");
         MapsCommon.print(client.getPointOfInterestCategoryTree(null));
+        // END: com.azure.maps.search.sync.search_poi_category_tree
 
         // Post search along route -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/post-search-along-route
+        // BEGIN: com.azure.maps.search.sync.search_along_route
         System.out.println("Search Along Route");
 
         // create route points
@@ -316,9 +334,11 @@ public class BuilderSamples {
                 .setCategoryFilter(Arrays.asList(7315))
                 .setTop(5),
             null).getStatusCode());
+        // END: com.azure.maps.search.sync.search_along_route
 
         // Search inside geometry -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/post-search-along-route
+        // BEGIN: com.azure.maps.search.sync.search_inside_geometry
         System.out.println("Search Inside Geometry");
 
         // create GeoPolygon
@@ -344,6 +364,7 @@ public class BuilderSamples {
             new SearchInsideGeometryOptions("Leland Avenue", polygon)
                 .setTop(5),
             null).getStatusCode());
+        // END: com.azure.maps.search.sync.search_inside_geometry
 
         /* Batch operations. */
 
@@ -352,6 +373,7 @@ public class BuilderSamples {
         // This call posts addresses for search using the Synchronous Batch API.
         // All results will be available when the call returns. A maximum of 100
         // addresses can be searched this way.
+        // BEGIN: com.azure.maps.search.sync.search_address_batch
         List<SearchAddressOptions> optionsList = new ArrayList<>();
         optionsList.add(new SearchAddressOptions("400 Broad St, Seattle, WA 98109").setTop(3));
         optionsList.add(new SearchAddressOptions("One, Microsoft Way, Redmond, WA 98052").setTop(3));
@@ -370,11 +392,13 @@ public class BuilderSamples {
         BatchSearchResult result = poller.getFinalResult();
         MapsCommon.print(result.getBatchSummary());
         MapsCommon.print(result.getBatchItems().get(0).getResult().getResults().get(0).getBoundingBox());
+        // END: com.azure.maps.search.sync.search_address_batch
 
         // Search address reverse batch -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/post-search-address-reverse-batch
         // This is also a batch API like searchAddressBatch(), so the same calling
         // patterns apply.
+        // BEGIN: com.azure.maps.search.sync.reverse_search_address_batch
         List<ReverseSearchAddressOptions> reverseOptionsList = new ArrayList<>();
         reverseOptionsList.add(new ReverseSearchAddressOptions(new GeoPosition(2.294911, 48.858561)));
         reverseOptionsList.add(
@@ -389,11 +413,13 @@ public class BuilderSamples {
         MapsCommon.print(br1);
         MapsCommon.print(br1.getBatchItems());
         MapsCommon.print(br1.getBatchItems().get(0).getResult().getAddresses().get(0).getAddress());
+        // END: com.azure.maps.search.sync.reverse_search_address_batch
 
-        // Post search address reverse batch -
+        // Post fuzzy search batch -
         // https://docs.microsoft.com/en-us/rest/api/maps/search/post-search-fuzzy-batch
         // This is also a batch API like postSearchAddressBatch(), so the same calling
         // patterns apply.
+        // BEGIN: com.azure.maps.search.sync.fuzzy_search_batch
         List<FuzzySearchOptions> fuzzyOptionsList = new ArrayList<>();
         fuzzyOptionsList.add(new FuzzySearchOptions("atm", new GeoPosition(-122.128362, 47.639769))
             .setRadiusInMeters(5000).setTop(5));
@@ -403,6 +429,7 @@ public class BuilderSamples {
 
         System.out.println("Post Search Fuzzy Batch Async");
         MapsCommon.print(client.beginFuzzySearchBatch(fuzzyOptionsList).getFinalResult());
+        // END: com.azure.maps.search.sync.fuzzy_search_batch
     }
 
 }
