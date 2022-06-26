@@ -204,7 +204,7 @@ public class RouteClientTest extends RouteTestBase {
             .setSupportingPoints(supportingPoints)
             .setAvoidVignette(Arrays.asList("AUS", "CHE"))
             .setAvoidAreas(avoidAreas);
-        RouteDirections actualResult = client.getRouteDirectionsWithAdditionalParameters(routeOptions, parameters);
+        RouteDirections actualResult = client.getRouteDirections(routeOptions, parameters);
         RouteDirections expectedResult = TestUtils.getExpectedRouteDirectionsWithAdditionalParameters();
         validateGetRouteDirections(expectedResult, actualResult);
     }
@@ -246,7 +246,7 @@ public class RouteClientTest extends RouteTestBase {
             .setSupportingPoints(supportingPoints)
             .setAvoidVignette(Arrays.asList("AUS", "CHE"))
             .setAvoidAreas(avoidAreas);
-        validateGetRouteDirectionsWithResponse(TestUtils.getExpectedRouteDirections(), 200, client.getRouteDirectionsWithAdditionalParametersWithResponse(routeOptions, parameters, null));
+        validateGetRouteDirectionsWithResponse(TestUtils.getExpectedRouteDirections(), 200, client.getRouteDirectionsWithResponse(routeOptions, parameters, null));
     }
 
     // Case 2: Respone 400, incorrect input
@@ -286,7 +286,7 @@ public class RouteClientTest extends RouteTestBase {
             .setAvoidVignette(Arrays.asList("AUS", "CHE"))
             .setAvoidAreas(avoidAreas);
         final HttpResponseException httpResponseException = assertThrows(HttpResponseException.class,
-                () -> client.getRouteDirectionsWithAdditionalParametersWithResponse(routeOptions, parameters, null));
+                () -> client.getRouteDirectionsWithResponse(routeOptions, parameters, null));
         assertEquals(400, httpResponseException.getResponse().getStatusCode());
     }
 

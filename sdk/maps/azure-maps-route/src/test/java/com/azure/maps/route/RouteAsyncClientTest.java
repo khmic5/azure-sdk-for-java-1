@@ -208,7 +208,7 @@ public class RouteAsyncClientTest extends RouteTestBase {
             .setSupportingPoints(supportingPoints)
             .setAvoidVignette(Arrays.asList("AUS", "CHE"))
             .setAvoidAreas(avoidAreas);
-        StepVerifier.create(client.getRouteDirectionsWithAdditionalParameters(routeOptions, parameters))
+        StepVerifier.create(client.getRouteDirections(routeOptions, parameters))
         .assertNext(actualResults -> {
             try {
                 validateGetRouteDirections(TestUtils.getExpectedRouteDirectionsWithAdditionalParameters(), actualResults);
@@ -255,7 +255,7 @@ public class RouteAsyncClientTest extends RouteTestBase {
             .setSupportingPoints(supportingPoints)
             .setAvoidVignette(Arrays.asList("AUS", "CHE"))
             .setAvoidAreas(avoidAreas);
-        StepVerifier.create(client.getRouteDirectionsWithAdditionalParametersWithResponse(routeOptions, parameters))
+        StepVerifier.create(client.getRouteDirectionsWithResponse(routeOptions, parameters))
         .assertNext(actualResults -> {
             try {
                 validateGetRouteDirectionsWithResponse(TestUtils.getExpectedRouteDirectionsWithAdditionalParameters(), 200, actualResults);
@@ -301,7 +301,7 @@ public class RouteAsyncClientTest extends RouteTestBase {
             .setSupportingPoints(supportingPoints)
             .setAvoidVignette(Arrays.asList("AUS", "CHE"))
             .setAvoidAreas(avoidAreas);
-        StepVerifier.create(client.getRouteDirectionsWithAdditionalParametersWithResponse(routeOptions, parameters))
+        StepVerifier.create(client.getRouteDirectionsWithResponse(routeOptions, parameters))
                 .verifyErrorSatisfies(ex -> {
                     final HttpResponseException httpResponseException = (HttpResponseException) ex;
                     assertEquals(400, httpResponseException.getResponse().getStatusCode());

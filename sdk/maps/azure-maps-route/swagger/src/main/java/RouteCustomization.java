@@ -33,6 +33,9 @@ public class RouteCustomization extends Customization {
 
         // customize route batch item
         customizeDirectionsBatchItem(models);
+
+        // customize error repsponse exception
+        customizeErrorResponseException(models);
     }
 
     // Customizes the RouteMatrix class by flattening the Response property.
@@ -146,5 +149,24 @@ public class RouteCustomization extends Customization {
 
         // remove getResponse
         classCustomization.removeMethod("getResponse");
+    }
+
+    // Customizes the ErrorResponseException class
+    private void customizeErrorResponseException(PackageCustomization models) {
+        final String getValueMethod =
+            "/** " +
+            "* Gets the deserialized response value." +
+            "*/" +
+            "@Override " +
+            "public ResponseError getValue() {" +
+            "   return (ResponseError) super.getValue();" +
+            "}";
+        ClassCustomization classCustomization = models.getClass("ErrorResponseException");
+        MethodCustomization mc = classCustomization.getMethod("getValue");
+        mc.removeAnnotation("@Override");
+        classCustomization.removeMethod("getValue");
+        classCustomization.addMethod(getValueMethod, Arrays.asList("com.azure.core.models.ResponseError"));
+        classCustomization.getConstructor("ErrorResponseException(String message, HttpResponse response, ErrorResponse value)")
+            .replaceParameters("String message, HttpResponse response, ResponseError value");
     }
 }

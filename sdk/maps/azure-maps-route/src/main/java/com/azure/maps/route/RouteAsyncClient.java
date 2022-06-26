@@ -238,7 +238,7 @@ public final class RouteAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<RouteDirections>> getRouteDirectionsWithResponse(
             RouteDirectionsOptions options) {
-        return this.getRouteDirectionsWithResponse(options, null);
+        return this.getRouteDirectionsWithContextWithResponse(options, null);
     }
 
     /**
@@ -251,7 +251,7 @@ public final class RouteAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this object is returned from a successful Route Directions call.
      */
-    Mono<Response<RouteDirections>> getRouteDirectionsWithResponse(
+    Mono<Response<RouteDirections>> getRouteDirectionsWithContextWithResponse(
             RouteDirectionsOptions options, Context context) {
         return this.serviceClient.getRouteDirectionsWithResponseAsync(
                 ResponseFormat.JSON,
@@ -312,11 +312,11 @@ public final class RouteAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<RouteDirections> getRouteDirectionsWithAdditionalParameters(
+    public Mono<RouteDirections> getRouteDirections(
             RouteDirectionsOptions options,
             RouteDirectionsParameters parameters) {
         Mono<Response<RouteDirections>> result =
-            this.getRouteDirectionsWithAdditionalParametersWithResponse(options, parameters);
+            this.getRouteDirectionsWithResponse(options, parameters);
         return result.flatMap(response -> {
             return Mono.just(response.getValue());
         });
@@ -333,10 +333,10 @@ public final class RouteAsyncClient {
      * @return this object is returned from a successful Route Directions call.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<RouteDirections>> getRouteDirectionsWithAdditionalParametersWithResponse(
+    public Mono<Response<RouteDirections>> getRouteDirectionsWithResponse(
             RouteDirectionsOptions options,
             RouteDirectionsParameters parameters) {
-        return this.getRouteDirectionsWithAdditionalParametersWithResponse(options, parameters, null);
+        return this.getRouteDirectionsWithParametersWithResponse(options, parameters, null);
     }
 
     /**
@@ -350,7 +350,7 @@ public final class RouteAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this object is returned from a successful Route Directions call.
      */
-    Mono<Response<RouteDirections>> getRouteDirectionsWithAdditionalParametersWithResponse(
+    Mono<Response<RouteDirections>> getRouteDirectionsWithParametersWithResponse(
             RouteDirectionsOptions options,
             RouteDirectionsParameters parameters,
             Context context) {

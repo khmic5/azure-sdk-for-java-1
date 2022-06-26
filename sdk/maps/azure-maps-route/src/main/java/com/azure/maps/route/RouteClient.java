@@ -170,7 +170,7 @@ public final class RouteClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<RouteDirections> getRouteDirectionsWithResponse(
             RouteDirectionsOptions options, Context context) {
-        return this.asyncClient.getRouteDirectionsWithResponse(options, context).block();
+        return this.asyncClient.getRouteDirectionsWithContextWithResponse(options, context).block();
     }
 
     /**
@@ -184,9 +184,9 @@ public final class RouteClient {
      * @return this object is returned from a successful Route Directions call.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public RouteDirections getRouteDirectionsWithAdditionalParameters(
+    public RouteDirections getRouteDirections(
             RouteDirectionsOptions options, RouteDirectionsParameters parameters) {
-        return this.asyncClient.getRouteDirectionsWithAdditionalParameters(options, parameters).block();
+        return this.asyncClient.getRouteDirections(options, parameters).block();
     }
 
     /**
@@ -201,9 +201,9 @@ public final class RouteClient {
      * @return this object is returned from a successful Route Directions call.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<RouteDirections> getRouteDirectionsWithAdditionalParametersWithResponse(
+    public Response<RouteDirections> getRouteDirectionsWithResponse(
             RouteDirectionsOptions options, RouteDirectionsParameters parameters, Context context) {
-        return this.asyncClient.getRouteDirectionsWithAdditionalParametersWithResponse(
+        return this.asyncClient.getRouteDirectionsWithParametersWithResponse(
             options, parameters, context).block();
     }
 
