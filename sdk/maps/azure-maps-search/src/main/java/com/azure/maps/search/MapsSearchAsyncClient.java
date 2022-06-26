@@ -56,7 +56,41 @@ import com.azure.maps.search.models.StructuredAddress;
 
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SearchClient type. */
+/** Initializes a new instance of the asynchronous SearchClient type. 
+* Creating an async client using a {@link com.azure.core.credential.AzureKeyCredential}:
+* <!-- src_embed com.azure.maps.search.async.builder.key.instantiation -->
+* <pre>
+* &#47;&#47; Authenticates using subscription key
+* AzureKeyCredential keyCredential = new AzureKeyCredential&#40;System.getenv&#40;&quot;SUBSCRIPTION_KEY&quot;&#41;&#41;;
+*
+* &#47;&#47; Creates a builder
+* MapsSearchClientBuilder builder = new MapsSearchClientBuilder&#40;&#41;;
+* builder.credential&#40;keyCredential&#41;;
+* builder.httpLogOptions&#40;new HttpLogOptions&#40;&#41;.setLogLevel&#40;HttpLogDetailLevel.BODY_AND_HEADERS&#41;&#41;;
+*
+* &#47;&#47; Builds the client
+* MapsSearchAsyncClient client = builder.buildAsyncClient&#40;&#41;;
+* </pre>
+* <!-- end com.azure.maps.search.async.builder.key.instantiation -->
+* Creating an async client using a {@link com.azure.core.credential.TokenCredential}:
+* <!-- src_embed com.azure.maps.search.async.builder.ad.instantiation -->
+* <pre>
+* &#47;&#47; Authenticates using Azure AD building a default credential
+* &#47;&#47; This will look for AZURE_CLIENT_ID, AZURE_TENANT_ID, and AZURE_CLIENT_SECRET env variables
+* DefaultAzureCredential tokenCredential = new DefaultAzureCredentialBuilder&#40;&#41;.build&#40;&#41;;
+*
+* &#47;&#47; Creates a builder
+* MapsSearchClientBuilder builder = new MapsSearchClientBuilder&#40;&#41;;
+* builder.credential&#40;tokenCredential&#41;;
+* builder.mapsClientId&#40;System.getenv&#40;&quot;MAPS_CLIENT_ID&quot;&#41;&#41;;
+* builder.httpLogOptions&#40;new HttpLogOptions&#40;&#41;.setLogLevel&#40;HttpLogDetailLevel.BODY_AND_HEADERS&#41;&#41;;
+*
+* &#47;&#47; Builds a client
+* MapsSearchAsyncClient client = builder.buildAsyncClient&#40;&#41;;
+* </pre>
+* <!-- end com.azure.maps.search.async.builder.ad.instantiation -->
+*/ 
+
 @ServiceClient(builder = MapsSearchClientBuilder.class, isAsync = true)
 public final class MapsSearchAsyncClient {
     // constants
@@ -90,6 +124,21 @@ public final class MapsSearchAsyncClient {
 
     /**
      * List Polygons
+     * <!-- src_embed com.azure.maps.search.async.get_polygon -->
+     * <pre>
+     * List&lt;String&gt; getPolygonIds = results.getResults&#40;&#41;.stream&#40;&#41;
+     *     .filter&#40;item -&gt; item.getDataSource&#40;&#41; != null &amp;&amp; item.getDataSource&#40;&#41;.getGeometry&#40;&#41; != null&#41;
+     *     .map&#40;item -&gt; item.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;&#41;
+     *     .collect&#40;Collectors.toList&#40;&#41;&#41;;
+     * getPolygonIds.add&#40;fuzzySearchId&#41;;
+     *
+     * if &#40;ids != null &amp;&amp; !getPolygonIds.isEmpty&#40;&#41;&#41; &#123;
+     *     System.out.println&#40;&quot;Get Polygon: &quot; + ids&#41;;
+     *     MapsCommon.print&#40;asyncClient.getPolygons&#40;ids&#41;&#41;;
+     *     MapsCommon.print&#40;asyncClient.getPolygonsWithResponse&#40;ids&#41;.block&#40;&#41;.getValue&#40;&#41;.getClass&#40;&#41;&#41;;
+     * &#125;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.get_polygon -->
      *
      * @param geometryIds Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -107,6 +156,21 @@ public final class MapsSearchAsyncClient {
 
     /**
      * List Polygons
+     * <!-- src_embed com.azure.maps.search.async.get_polygon -->
+     * <pre>
+     * List&lt;String&gt; getPolygonIds = results.getResults&#40;&#41;.stream&#40;&#41;
+     *     .filter&#40;item -&gt; item.getDataSource&#40;&#41; != null &amp;&amp; item.getDataSource&#40;&#41;.getGeometry&#40;&#41; != null&#41;
+     *     .map&#40;item -&gt; item.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;&#41;
+     *     .collect&#40;Collectors.toList&#40;&#41;&#41;;
+     * getPolygonIds.add&#40;fuzzySearchId&#41;;
+     *
+     * if &#40;ids != null &amp;&amp; !getPolygonIds.isEmpty&#40;&#41;&#41; &#123;
+     *     System.out.println&#40;&quot;Get Polygon: &quot; + ids&#41;;
+     *     MapsCommon.print&#40;asyncClient.getPolygons&#40;ids&#41;&#41;;
+     *     MapsCommon.print&#40;asyncClient.getPolygonsWithResponse&#40;ids&#41;.block&#40;&#41;.getValue&#40;&#41;.getClass&#40;&#41;&#41;;
+     * &#125;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.get_polygon -->
      *
      * @param geometryIds Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -121,6 +185,21 @@ public final class MapsSearchAsyncClient {
 
     /**
      * List Polygons
+     * <!-- src_embed com.azure.maps.search.async.get_polygon -->
+     * <pre>
+     * List&lt;String&gt; getPolygonIds = results.getResults&#40;&#41;.stream&#40;&#41;
+     *     .filter&#40;item -&gt; item.getDataSource&#40;&#41; != null &amp;&amp; item.getDataSource&#40;&#41;.getGeometry&#40;&#41; != null&#41;
+     *     .map&#40;item -&gt; item.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;&#41;
+     *     .collect&#40;Collectors.toList&#40;&#41;&#41;;
+     * getPolygonIds.add&#40;fuzzySearchId&#41;;
+     *
+     * if &#40;ids != null &amp;&amp; !getPolygonIds.isEmpty&#40;&#41;&#41; &#123;
+     *     System.out.println&#40;&quot;Get Polygon: &quot; + ids&#41;;
+     *     MapsCommon.print&#40;asyncClient.getPolygons&#40;ids&#41;&#41;;
+     *     MapsCommon.print&#40;asyncClient.getPolygonsWithResponse&#40;ids&#41;.block&#40;&#41;.getValue&#40;&#41;.getClass&#40;&#41;&#41;;
+     * &#125;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.get_polygon -->
      *
      * @param geometryIds Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.
      * @param context The context to associate with this operation.
@@ -143,6 +222,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Fuzzy:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.fuzzySearch&#40;new FuzzySearchOptions&#40;&quot;starbucks&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with options
+     * SearchAddressResult fuzzySearchResults = asyncClient.fuzzySearch&#40;
+     *     new FuzzySearchOptions&#40;&quot;1 Microsoft Way&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResults&#41;;
+     *
+     * &#47;&#47; with response
+     * Response&lt;SearchAddressResult&gt; fuzzySearchResponse = asyncClient.fuzzySearchWithResponse&#40;
+     *     new FuzzySearchOptions&#40;&quot;Monaco&quot;&#41;.setEntityType&#40;GeographicEntityType.COUNTRY&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResponse.getStatusCode&#40;&#41;&#41;;
+     * String fuzzySearchId = fuzzySearchResponse.getValue&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search -->
      *
      * @param options {@link FuzzySearchOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -160,6 +260,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Fuzzy:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.fuzzySearch&#40;new FuzzySearchOptions&#40;&quot;starbucks&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with options
+     * SearchAddressResult fuzzySearchResults = asyncClient.fuzzySearch&#40;
+     *     new FuzzySearchOptions&#40;&quot;1 Microsoft Way&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResults&#41;;
+     *
+     * &#47;&#47; with response
+     * Response&lt;SearchAddressResult&gt; fuzzySearchResponse = asyncClient.fuzzySearchWithResponse&#40;
+     *     new FuzzySearchOptions&#40;&quot;Monaco&quot;&#41;.setEntityType&#40;GeographicEntityType.COUNTRY&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResponse.getStatusCode&#40;&#41;&#41;;
+     * String fuzzySearchId = fuzzySearchResponse.getValue&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search -->
      *
      * @param query the query string used in the search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -177,6 +298,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Fuzzy:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.fuzzySearch&#40;new FuzzySearchOptions&#40;&quot;starbucks&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with options
+     * SearchAddressResult fuzzySearchResults = asyncClient.fuzzySearch&#40;
+     *     new FuzzySearchOptions&#40;&quot;1 Microsoft Way&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResults&#41;;
+     *
+     * &#47;&#47; with response
+     * Response&lt;SearchAddressResult&gt; fuzzySearchResponse = asyncClient.fuzzySearchWithResponse&#40;
+     *     new FuzzySearchOptions&#40;&quot;Monaco&quot;&#41;.setEntityType&#40;GeographicEntityType.COUNTRY&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResponse.getStatusCode&#40;&#41;&#41;;
+     * String fuzzySearchId = fuzzySearchResponse.getValue&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search -->
      *
      * @param options {@link FuzzySearchOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -191,6 +333,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Fuzzy:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.fuzzySearch&#40;new FuzzySearchOptions&#40;&quot;starbucks&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with options
+     * SearchAddressResult fuzzySearchResults = asyncClient.fuzzySearch&#40;
+     *     new FuzzySearchOptions&#40;&quot;1 Microsoft Way&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResults&#41;;
+     *
+     * &#47;&#47; with response
+     * Response&lt;SearchAddressResult&gt; fuzzySearchResponse = asyncClient.fuzzySearchWithResponse&#40;
+     *     new FuzzySearchOptions&#40;&quot;Monaco&quot;&#41;.setEntityType&#40;GeographicEntityType.COUNTRY&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;;
+     * MapsCommon.print&#40;fuzzySearchResponse.getStatusCode&#40;&#41;&#41;;
+     * String fuzzySearchId = fuzzySearchResponse.getValue&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search -->
      *
      * @param options {@link FuzzySearchOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
@@ -229,6 +392,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.get_search_poi -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Points of Interest:&quot;&#41;;
+     *
+     * &#47;&#47; coordinates
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestWithResponse&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.get_search_poi -->
      *
      * @param options {@link SearchPointOfInterestOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -246,6 +430,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.get_search_poi -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Points of Interest:&quot;&#41;;
+     *
+     * &#47;&#47; coordinates
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestWithResponse&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.get_search_poi -->
      *
      * @param query The query to be used to search for points of interest.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -263,6 +468,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.get_search_poi -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Points of Interest:&quot;&#41;;
+     *
+     * &#47;&#47; coordinates
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestWithResponse&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.get_search_poi -->
      *
      * @param options {@link SearchPointOfInterestOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -277,6 +503,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.get_search_poi -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Points of Interest:&quot;&#41;;
+     *
+     * &#47;&#47; coordinates
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestWithResponse&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.get_search_poi -->
      *
      * @param options {@link SearchPointOfInterestOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
@@ -312,6 +559,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Nearby Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.search_nearby -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Nearby:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterest&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;&#41;;
+     *
+     * &#47;&#47; response
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterestWithResponse&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_nearby -->
      *
      * @param options {@link SearchNearbyPointsOfInterestOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -330,6 +594,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Nearby Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.search_nearby -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Nearby:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterest&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;&#41;;
+     *
+     * &#47;&#47; response
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterestWithResponse&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_nearby -->
      *
      * @param query A pair of coordinates for query.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -348,6 +629,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Nearby Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.search_nearby -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Nearby:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterest&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;&#41;;
+     *
+     * &#47;&#47; response
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterestWithResponse&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_nearby -->
      *
      * @param options {@link SearchNearbyPointsOfInterestOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -363,6 +661,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Nearby Point of Interest
+     * <!-- src_embed com.azure.maps.search.async.search_nearby -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Nearby:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterest&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;&#41;;
+     *
+     * &#47;&#47; response
+     * MapsCommon.print&#40;asyncClient.searchNearbyPointOfInterestWithResponse&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_nearby -->
      *
      * @param options {@link SearchNearbyPointsOfInterestOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
@@ -396,6 +711,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest per Category
+     * <!-- src_embed com.azure.maps.search.async.search_poi_category -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Point of Interest Category:&quot;&#41;;
+     *
+     * &#47;&#47; complete - search for italian restaurant in NYC
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategory&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategoryWithResponse&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_poi_category -->
      *
      * @param options a {@link SearchPointOfInterestCategoryOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -413,6 +745,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest per Category
+     * <!-- src_embed com.azure.maps.search.async.search_poi_category -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Point of Interest Category:&quot;&#41;;
+     *
+     * &#47;&#47; complete - search for italian restaurant in NYC
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategory&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategoryWithResponse&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_poi_category -->
      *
      * @param query The query to be used to search for points of interest.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -430,6 +779,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest per Category
+     * <!-- src_embed com.azure.maps.search.async.search_poi_category -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Point of Interest Category:&quot;&#41;;
+     *
+     * &#47;&#47; complete - search for italian restaurant in NYC
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategory&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategoryWithResponse&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_poi_category -->
      *
      * @param options a {@link SearchPointOfInterestCategoryOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -445,6 +811,23 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Point of Interest per Category
+     * <!-- src_embed com.azure.maps.search.async.search_poi_category -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Point of Interest Category:&quot;&#41;;
+     *
+     * &#47;&#47; complete - search for italian restaurant in NYC
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategory&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;asyncClient.searchPointOfInterestCategoryWithResponse&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_poi_category -->
      *
      * @param options a {@link SearchPointOfInterestCategoryOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -480,6 +863,12 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Get Point of Interest Category Tree
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category_tree -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Search POI Category Tree:&quot;&#41;;
+     * MapsCommon.print&#40;client.getPointOfInterestCategoryTree&#40;null&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category_tree -->
      *
      * @param language Language in which search results should be returned. Should be one of supported IETF language
      *     tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not
@@ -498,6 +887,12 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Get Point of Interest Category Tree
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category_tree -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Search POI Category Tree:&quot;&#41;;
+     * MapsCommon.print&#40;client.getPointOfInterestCategoryTree&#40;null&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category_tree -->
      *
      * @param language Language in which search results should be returned. Should be one of supported IETF language
      *     tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not
@@ -517,6 +912,12 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Get Point of Interest Category Tree
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category_tree -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Search POI Category Tree:&quot;&#41;;
+     * MapsCommon.print&#40;client.getPointOfInterestCategoryTree&#40;null&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category_tree -->
      *
      * @param language Language in which search results should be returned. Should be one of supported IETF language
      *     tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not
@@ -537,6 +938,29 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Address
+     * <!-- src_embed com.azure.maps.search.async.search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;15127 NE 24th Street, Redmond, WA 98052&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAddressWithResponse&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address -->
      *
      * @param options a {@link SearchAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -554,6 +978,29 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Address
+     * <!-- src_embed com.azure.maps.search.async.search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;15127 NE 24th Street, Redmond, WA 98052&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAddressWithResponse&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address -->
      *
      * @param query the query string used in the fuzzy search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -571,6 +1018,29 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Address
+     * <!-- src_embed com.azure.maps.search.async.search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;15127 NE 24th Street, Redmond, WA 98052&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAddressWithResponse&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address -->
      *
      * @param options a {@link SearchAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -585,6 +1055,29 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Address
+     * <!-- src_embed com.azure.maps.search.async.search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;15127 NE 24th Street, Redmond, WA 98052&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAddress&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAddressWithResponse&#40;
+     *     new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *         .setCoordinates&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setRadiusInMeters&#40;40000&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address -->
      *
      * @param options a {@link SearchAddressOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -616,6 +1109,31 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Reverse:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41; &#47;&#47; returns only city
+     * &#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddressWithResponse&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address -->
      *
      * @param options a {@link ReverseSearchAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -633,6 +1151,31 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Reverse:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41; &#47;&#47; returns only city
+     * &#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddressWithResponse&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address -->
      *
      * @param query The applicable query as a pair of coordinates.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -650,6 +1193,31 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Reverse:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41; &#47;&#47; returns only city
+     * &#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddressWithResponse&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address -->
      *
      * @param options a {@link ReverseSearchAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -665,6 +1233,31 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Reverse:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddress&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41; &#47;&#47; returns only city
+     * &#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchAddressWithResponse&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setIncludeSpeedLimit&#40;true&#41;
+     *         .setEntityType&#40;GeographicEntityType.COUNTRY_SECONDARY_SUBDIVISION&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address -->
      *
      * @param options a {@link ReverseSearchAddressOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -695,6 +1288,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search to a Cross Street
+     * <!-- src_embed com.azure.maps.search.async.search_reverse_cross_street_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Revere Search Cross Street Address:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddressWithResponse&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_reverse_cross_street_address -->
      *
      * @param options a {@link ReverseSearchCrossStreetAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -714,6 +1328,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search to a Cross Street
+     * <!-- src_embed com.azure.maps.search.async.search_reverse_cross_street_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Revere Search Cross Street Address:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddressWithResponse&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_reverse_cross_street_address -->
      *
      * @param query with a pair of coordinates.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -733,6 +1368,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search to a Cross Street
+     * <!-- src_embed com.azure.maps.search.async.search_reverse_cross_street_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Revere Search Cross Street Address:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddressWithResponse&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_reverse_cross_street_address -->
      *
      * @param options a {@link ReverseSearchCrossStreetAddressOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -748,6 +1404,27 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Reverse Address Search to a Cross Street
+     * <!-- src_embed com.azure.maps.search.async.search_reverse_cross_street_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Revere Search Cross Street Address:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddress&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.reverseSearchCrossStreetAddressWithResponse&#40;
+     *     new ReverseSearchCrossStreetAddressOptions&#40;new GeoPosition&#40;-121.89, 37.337&#41;&#41;
+     *         .setTop&#40;2&#41;
+     *         .setHeading&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_reverse_cross_street_address -->
      *
      * @param options a {@link ReverseSearchCrossStreetAddressOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -772,6 +1449,30 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Structured Address Search
+     * <!-- src_embed com.azure.maps.search.async.search_structured_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Structured:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddress&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;, null&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddressWithResponse&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;,
+     *     new SearchStructuredAddressOptions&#40;&#41;
+     *             .setTop&#40;2&#41;
+     *             .setRadiusInMeters&#40;1000&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_structured_address -->
      *
      * @param address a {@link StructuredAddress} to be searched by the API.
      * @param options a {@link SearchStructuredAddressOptions} representing the search parameters.
@@ -792,6 +1493,30 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Structured Address Search
+     * <!-- src_embed com.azure.maps.search.async.search_structured_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Structured:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddress&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;, null&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddressWithResponse&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;,
+     *     new SearchStructuredAddressOptions&#40;&#41;
+     *             .setTop&#40;2&#41;
+     *             .setRadiusInMeters&#40;1000&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_structured_address -->
      *
      * @param countryCode the country code for query.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -809,6 +1534,30 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Structured Address Search
+     * <!-- src_embed com.azure.maps.search.async.search_structured_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Structured:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddress&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;, null&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddressWithResponse&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;,
+     *     new SearchStructuredAddressOptions&#40;&#41;
+     *             .setTop&#40;2&#41;
+     *             .setRadiusInMeters&#40;1000&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_structured_address -->
      *
      * @param address a {@link StructuredAddress} to be searched by the API.
      * @param options a {@link SearchStructuredAddressOptions} representing the search parameters.
@@ -825,6 +1574,30 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Structured Address Search
+     * <!-- src_embed com.azure.maps.search.async.search_structured_address -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Address Structured:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddress&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;, null&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchStructuredAddressWithResponse&#40;new StructuredAddress&#40;&quot;US&quot;&#41;
+     *     .setPostalCode&#40;&quot;98121&quot;&#41;
+     *     .setStreetNumber&#40;&quot;15127&quot;&#41;
+     *     .setStreetName&#40;&quot;NE 24th Street&quot;&#41;
+     *     .setMunicipality&#40;&quot;Redmond&quot;&#41;
+     *     .setCountrySubdivision&#40;&quot;WA&quot;&#41;,
+     *     new SearchStructuredAddressOptions&#40;&#41;
+     *             .setTop&#40;2&#41;
+     *             .setRadiusInMeters&#40;1000&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_structured_address -->
      *
      * @param address a {@link StructuredAddress} to be searched by the API.
      * @param options a {@link SearchStructuredAddressOptions} representing the search parameters.
@@ -862,6 +1635,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Inside Geometry
+     * <!-- src_embed com.azure.maps.search.async.search_inside_geometry -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Inside Geometry&quot;&#41;;
+     *
+     * &#47;&#47; create GeoPolygon
+     * List&lt;GeoPosition&gt; searchInsideGeometryCoordinates = new ArrayList&lt;&gt;&#40;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43301391601562, 37.70660472542312&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.36434936523438, 37.712059855877314&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * GeoLinearRing searchInsideGeometryRing = new GeoLinearRing&#40;searchInsideGeometryCoordinates&#41;;
+     * GeoPolygon searchInsideGeometryPolygon = new GeoPolygon&#40;searchInsideGeometryRing&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometryWithResponse&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_inside_geometry -->
      *
      * @param options a {@link SearchInsideGeometryOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -879,6 +1680,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Inside Geometry
+     * <!-- src_embed com.azure.maps.search.async.search_inside_geometry -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Inside Geometry&quot;&#41;;
+     *
+     * &#47;&#47; create GeoPolygon
+     * List&lt;GeoPosition&gt; searchInsideGeometryCoordinates = new ArrayList&lt;&gt;&#40;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43301391601562, 37.70660472542312&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.36434936523438, 37.712059855877314&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * GeoLinearRing searchInsideGeometryRing = new GeoLinearRing&#40;searchInsideGeometryCoordinates&#41;;
+     * GeoPolygon searchInsideGeometryPolygon = new GeoPolygon&#40;searchInsideGeometryRing&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometryWithResponse&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_inside_geometry -->
      *
      * @param query query string
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -896,6 +1725,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Inside Geometry
+     * <!-- src_embed com.azure.maps.search.async.search_inside_geometry -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Inside Geometry&quot;&#41;;
+     *
+     * &#47;&#47; create GeoPolygon
+     * List&lt;GeoPosition&gt; searchInsideGeometryCoordinates = new ArrayList&lt;&gt;&#40;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43301391601562, 37.70660472542312&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.36434936523438, 37.712059855877314&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * GeoLinearRing searchInsideGeometryRing = new GeoLinearRing&#40;searchInsideGeometryCoordinates&#41;;
+     * GeoPolygon searchInsideGeometryPolygon = new GeoPolygon&#40;searchInsideGeometryRing&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometryWithResponse&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_inside_geometry -->
      *
      * @param options a {@link SearchInsideGeometryOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -911,6 +1768,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Inside Geometry
+     * <!-- src_embed com.azure.maps.search.async.search_inside_geometry -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Inside Geometry&quot;&#41;;
+     *
+     * &#47;&#47; create GeoPolygon
+     * List&lt;GeoPosition&gt; searchInsideGeometryCoordinates = new ArrayList&lt;&gt;&#40;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43301391601562, 37.70660472542312&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.36434936523438, 37.712059855877314&#41;&#41;;
+     * searchInsideGeometryCoordinates.add&#40;new GeoPosition&#40;-122.43576049804686, 37.7524152343544&#41;&#41;;
+     * GeoLinearRing searchInsideGeometryRing = new GeoLinearRing&#40;searchInsideGeometryCoordinates&#41;;
+     * GeoPolygon searchInsideGeometryPolygon = new GeoPolygon&#40;searchInsideGeometryRing&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometry&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchInsideGeometryWithResponse&#40;
+     *     new SearchInsideGeometryOptions&#40;&quot;Leland Avenue&quot;, searchInsideGeometryPolygon&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_inside_geometry -->
      *
      * @param options a {@link SearchInsideGeometryOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -939,6 +1824,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Along Route
+     * <!-- src_embed com.azure.maps.search.async.search_along_route -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Along Route&quot;&#41;;
+     *
+     * &#47;&#47; create route points
+     * List&lt;GeoPosition&gt; getPolygonPoints = new ArrayList&lt;&gt;&#40;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.143035, 47.653536&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.187164, 47.617556&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.114981, 47.570599&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.132756, 47.654009&#41;&#41;;
+     * GeoLineString getPolygonRoute = new GeoLineString&#40;getPolygonPoints&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAlongRouteWithResponse&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_along_route -->
      *
      * @param options a {@link SearchAlongRouteOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -956,6 +1869,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Along Route
+     * <!-- src_embed com.azure.maps.search.async.search_along_route -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Along Route&quot;&#41;;
+     *
+     * &#47;&#47; create route points
+     * List&lt;GeoPosition&gt; getPolygonPoints = new ArrayList&lt;&gt;&#40;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.143035, 47.653536&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.187164, 47.617556&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.114981, 47.570599&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.132756, 47.654009&#41;&#41;;
+     * GeoLineString getPolygonRoute = new GeoLineString&#40;getPolygonPoints&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAlongRouteWithResponse&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_along_route -->
      *
      * @param query the search query
      * @param maxDetourTime the maximum detour time allowed
@@ -974,6 +1915,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Along Route
+     * <!-- src_embed com.azure.maps.search.async.search_along_route -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Along Route&quot;&#41;;
+     *
+     * &#47;&#47; create route points
+     * List&lt;GeoPosition&gt; getPolygonPoints = new ArrayList&lt;&gt;&#40;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.143035, 47.653536&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.187164, 47.617556&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.114981, 47.570599&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.132756, 47.654009&#41;&#41;;
+     * GeoLineString getPolygonRoute = new GeoLineString&#40;getPolygonPoints&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAlongRouteWithResponse&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_along_route -->
      *
      * @param options a {@link SearchAlongRouteOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -988,6 +1957,34 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Search Along Route
+     * <!-- src_embed com.azure.maps.search.async.search_along_route -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Along Route&quot;&#41;;
+     *
+     * &#47;&#47; create route points
+     * List&lt;GeoPosition&gt; getPolygonPoints = new ArrayList&lt;&gt;&#40;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.143035, 47.653536&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.187164, 47.617556&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.114981, 47.570599&#41;&#41;;
+     * points.add&#40;new GeoPosition&#40;-122.132756, 47.654009&#41;&#41;;
+     * GeoLineString getPolygonRoute = new GeoLineString&#40;getPolygonPoints&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;asyncClient.searchAlongRoute&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;&#41;;
+     *
+     * &#47;&#47; complete
+     * MapsCommon.print&#40;asyncClient.searchAlongRouteWithResponse&#40;
+     *     new SearchAlongRouteOptions&#40;&quot;burger&quot;, 1000, getPolygonRoute&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;.block&#40;&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_along_route -->
      *
      * @param options a {@link SearchAlongRouteOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -1016,7 +2013,20 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Batch Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search_batch -->
+     * <pre>
+     * List&lt;FuzzySearchOptions&gt; fuzzySearchBatchOptionsList = new ArrayList&lt;&gt;&#40;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;atm&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;.setTop&#40;5&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Statue of Liberty&quot;&#41;.setTop&#40;2&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Starbucks&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;&#41;;
      *
+     * System.out.println&#40;&quot;Post Search Fuzzy Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginFuzzySearchBatch&#40;fuzzyOptionsList&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search_batch -->
+     * 
      * @param optionsList a list of {@link FuzzySearchOptions} to be searched.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1024,13 +2034,25 @@ public final class MapsSearchAsyncClient {
      * @return this object is returned from a successful Batch Fuzzy Search service call.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BatchSearchResult, BatchSearchResult> beginFuzzySearchBatch(
-            List<FuzzySearchOptions> optionsList) {
+    public PollerFlux<BatchSearchResult, BatchSearchResult> beginFuzzySearchBatch(List<FuzzySearchOptions> optionsList) {
         return this.beginFuzzySearchBatch(optionsList, null);
     }
 
     /**
      * Batch Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search_batch -->
+     * <pre>
+     * List&lt;FuzzySearchOptions&gt; fuzzySearchBatchOptionsList = new ArrayList&lt;&gt;&#40;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;atm&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;.setTop&#40;5&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Statue of Liberty&quot;&#41;.setTop&#40;2&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Starbucks&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;&#41;;
+     *
+     * System.out.println&#40;&quot;Post Search Fuzzy Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginFuzzySearchBatch&#40;fuzzyOptionsList&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search_batch -->
      *
      * @param optionsList a list of {@link FuzzySearchOptions} to be searched.
      * @param context The context to associate with this operation.
@@ -1068,6 +2090,19 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Get Fuzzy Batch Search by Id
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search_batch -->
+     * <pre>
+     * List&lt;FuzzySearchOptions&gt; fuzzySearchBatchOptionsList = new ArrayList&lt;&gt;&#40;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;atm&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;.setTop&#40;5&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Statue of Liberty&quot;&#41;.setTop&#40;2&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Starbucks&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;&#41;;
+     *
+     * System.out.println&#40;&quot;Post Search Fuzzy Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginFuzzySearchBatch&#40;fuzzyOptionsList&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search_batch -->
      *
      * @param batchId Batch id for querying the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1083,6 +2118,19 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Get Fuzzy Batch Search by Id
+     * <!-- src_embed com.azure.maps.search.async.fuzzy_search_batch -->
+     * <pre>
+     * List&lt;FuzzySearchOptions&gt; fuzzySearchBatchOptionsList = new ArrayList&lt;&gt;&#40;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;atm&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;.setTop&#40;5&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Statue of Liberty&quot;&#41;.setTop&#40;2&#41;&#41;;
+     * fuzzySearchBatchOptionsList.add&#40;new FuzzySearchOptions&#40;&quot;Starbucks&quot;, new GeoPosition&#40;-122.128362, 47.639769&#41;&#41;
+     *     .setRadiusInMeters&#40;5000&#41;&#41;;
+     *
+     * System.out.println&#40;&quot;Post Search Fuzzy Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginFuzzySearchBatch&#40;fuzzyOptionsList&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.fuzzy_search_batch -->
      *
      * @param batchId Batch id for querying the operation.
      * @param context The context to associate with this operation.
@@ -1103,6 +2151,28 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Batch Address Search
+     * <!-- src_embed com.azure.maps.search.async.search_address_batch -->
+     * <pre>
+     * List&lt;SearchAddressOptions&gt; list = new ArrayList&lt;&gt;&#40;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;400 Broad St, Seattle, WA 98109&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;One, Microsoft Way, Redmond, WA 98052&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;350 5th Ave, New York, NY 10118&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *     .setCountryFilter&#40;Arrays.asList&#40;&quot;GB&quot;, &quot;US&quot;, &quot;AU&quot;&#41;&#41;.setTop&#40;3&#41;&#41;;
+     *
+     * &#47;&#47; Search address batch async -
+     * &#47;&#47; https:&#47;&#47;docs.microsoft.com&#47;en-us&#47;rest&#47;api&#47;maps&#47;search&#47;post-search-address-batch
+     * &#47;&#47; This call posts addresses for search using the Asynchronous Batch API.
+     * &#47;&#47; SyncPoller will do the polling automatically and you can retrieve the result
+     * &#47;&#47; with getFinalResult&#40;&#41;
+     * System.out.println&#40;&quot;Search Address Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginSearchAddressBatch&#40;list&#41;.blockFirst&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * SyncPoller&lt;BatchSearchResult, BatchSearchResult&gt; bp2 = asyncClient.beginSearchAddressBatch&#40;list&#41;.getSyncPoller&#40;&#41;;
+     * BatchSearchResult batchResult2 = bp2.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchSummary&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getBoundingBox&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address_batch -->
      *
      * @param optionsList a list of {@link FuzzySearchOptions} to be searched.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1118,6 +2188,28 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Batch Address Search
+     * <!-- src_embed com.azure.maps.search.async.search_address_batch -->
+     * <pre>
+     * List&lt;SearchAddressOptions&gt; list = new ArrayList&lt;&gt;&#40;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;400 Broad St, Seattle, WA 98109&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;One, Microsoft Way, Redmond, WA 98052&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;350 5th Ave, New York, NY 10118&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *     .setCountryFilter&#40;Arrays.asList&#40;&quot;GB&quot;, &quot;US&quot;, &quot;AU&quot;&#41;&#41;.setTop&#40;3&#41;&#41;;
+     *
+     * &#47;&#47; Search address batch async -
+     * &#47;&#47; https:&#47;&#47;docs.microsoft.com&#47;en-us&#47;rest&#47;api&#47;maps&#47;search&#47;post-search-address-batch
+     * &#47;&#47; This call posts addresses for search using the Asynchronous Batch API.
+     * &#47;&#47; SyncPoller will do the polling automatically and you can retrieve the result
+     * &#47;&#47; with getFinalResult&#40;&#41;
+     * System.out.println&#40;&quot;Search Address Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginSearchAddressBatch&#40;list&#41;.blockFirst&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * SyncPoller&lt;BatchSearchResult, BatchSearchResult&gt; bp2 = asyncClient.beginSearchAddressBatch&#40;list&#41;.getSyncPoller&#40;&#41;;
+     * BatchSearchResult batchResult2 = bp2.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchSummary&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getBoundingBox&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address_batch -->
      *
      * @param optionsList a list of {@link SearchAddressOptions} to be searched.
      * @param context The context to associate with this operation.
@@ -1158,6 +2250,28 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Get Batch Search Id
+     * <!-- src_embed com.azure.maps.search.async.search_address_batch -->
+     * <pre>
+     * List&lt;SearchAddressOptions&gt; list = new ArrayList&lt;&gt;&#40;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;400 Broad St, Seattle, WA 98109&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;One, Microsoft Way, Redmond, WA 98052&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;350 5th Ave, New York, NY 10118&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *     .setCountryFilter&#40;Arrays.asList&#40;&quot;GB&quot;, &quot;US&quot;, &quot;AU&quot;&#41;&#41;.setTop&#40;3&#41;&#41;;
+     *
+     * &#47;&#47; Search address batch async -
+     * &#47;&#47; https:&#47;&#47;docs.microsoft.com&#47;en-us&#47;rest&#47;api&#47;maps&#47;search&#47;post-search-address-batch
+     * &#47;&#47; This call posts addresses for search using the Asynchronous Batch API.
+     * &#47;&#47; SyncPoller will do the polling automatically and you can retrieve the result
+     * &#47;&#47; with getFinalResult&#40;&#41;
+     * System.out.println&#40;&quot;Search Address Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginSearchAddressBatch&#40;list&#41;.blockFirst&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * SyncPoller&lt;BatchSearchResult, BatchSearchResult&gt; bp2 = asyncClient.beginSearchAddressBatch&#40;list&#41;.getSyncPoller&#40;&#41;;
+     * BatchSearchResult batchResult2 = bp2.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchSummary&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getBoundingBox&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address_batch -->
      *
      * @param batchId Batch id for querying the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1173,6 +2287,28 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Get Batch Search Id
+     * <!-- src_embed com.azure.maps.search.async.search_address_batch -->
+     * <pre>
+     * List&lt;SearchAddressOptions&gt; list = new ArrayList&lt;&gt;&#40;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;400 Broad St, Seattle, WA 98109&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;One, Microsoft Way, Redmond, WA 98052&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;350 5th Ave, New York, NY 10118&quot;&#41;.setTop&#40;3&#41;&#41;;
+     * list.add&#40;new SearchAddressOptions&#40;&quot;1 Main Street&quot;&#41;
+     *     .setCountryFilter&#40;Arrays.asList&#40;&quot;GB&quot;, &quot;US&quot;, &quot;AU&quot;&#41;&#41;.setTop&#40;3&#41;&#41;;
+     *
+     * &#47;&#47; Search address batch async -
+     * &#47;&#47; https:&#47;&#47;docs.microsoft.com&#47;en-us&#47;rest&#47;api&#47;maps&#47;search&#47;post-search-address-batch
+     * &#47;&#47; This call posts addresses for search using the Asynchronous Batch API.
+     * &#47;&#47; SyncPoller will do the polling automatically and you can retrieve the result
+     * &#47;&#47; with getFinalResult&#40;&#41;
+     * System.out.println&#40;&quot;Search Address Batch Async&quot;&#41;;
+     * MapsCommon.print&#40;asyncClient.beginSearchAddressBatch&#40;list&#41;.blockFirst&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * SyncPoller&lt;BatchSearchResult, BatchSearchResult&gt; bp2 = asyncClient.beginSearchAddressBatch&#40;list&#41;.getSyncPoller&#40;&#41;;
+     * BatchSearchResult batchResult2 = bp2.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchSummary&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchResult2.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getBoundingBox&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.search_address_batch -->
      *
      * @param batchId Batch id for querying the operation.
      * @param context The context to associate with this operation.
@@ -1193,6 +2329,24 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Searches a batch of addresses given their coordinates.
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address_batch  -->
+     * <pre>
+     * List&lt;ReverseSearchAddressOptions&gt; list2 = new ArrayList&lt;&gt;&#40;&#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;2.294911, 48.858561&#41;&#41;&#41;;
+     * list2.add&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.127896, 47.639765&#41;&#41;
+     *         .setRadiusInMeters&#40;5000&#41;
+     * &#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.348170, 47.621028&#41;&#41;&#41;;
+     *
+     * System.out.println&#40;&quot;Reverse Search Address Batch Async&quot;&#41;;
+     * BatchReverseSearchResult batchReverseSearchResult =
+     *     asyncClient.beginReverseSearchAddressBatch&#40;list2&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getAddresses&#40;&#41;.get&#40;0&#41;.getAddress&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address_batch -->
      *
      * @param optionsList a list of {@link ReverseSearchAddressOptions} to be searched.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1208,6 +2362,24 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Searches a batch of addresses given their coordinates.
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address_batch  -->
+     * <pre>
+     * List&lt;ReverseSearchAddressOptions&gt; list2 = new ArrayList&lt;&gt;&#40;&#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;2.294911, 48.858561&#41;&#41;&#41;;
+     * list2.add&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.127896, 47.639765&#41;&#41;
+     *         .setRadiusInMeters&#40;5000&#41;
+     * &#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.348170, 47.621028&#41;&#41;&#41;;
+     *
+     * System.out.println&#40;&quot;Reverse Search Address Batch Async&quot;&#41;;
+     * BatchReverseSearchResult batchReverseSearchResult =
+     *     asyncClient.beginReverseSearchAddressBatch&#40;list2&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getAddresses&#40;&#41;.get&#40;0&#41;.getAddress&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address_batch -->
      *
      * @param optionsList a list of {@link ReverseSearchAddressOptions} to be searched.
      * @param context a {@link Context} object for distributed tracing.
@@ -1245,6 +2417,24 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Returns a batch of previously searched addressed given a batch id.
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address_batch  -->
+     * <pre>
+     * List&lt;ReverseSearchAddressOptions&gt; list2 = new ArrayList&lt;&gt;&#40;&#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;2.294911, 48.858561&#41;&#41;&#41;;
+     * list2.add&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.127896, 47.639765&#41;&#41;
+     *         .setRadiusInMeters&#40;5000&#41;
+     * &#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.348170, 47.621028&#41;&#41;&#41;;
+     *
+     * System.out.println&#40;&quot;Reverse Search Address Batch Async&quot;&#41;;
+     * BatchReverseSearchResult batchReverseSearchResult =
+     *     asyncClient.beginReverseSearchAddressBatch&#40;list2&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getAddresses&#40;&#41;.get&#40;0&#41;.getAddress&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address_batch -->
      *
      * @param batchId Batch id for querying the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1260,6 +2450,24 @@ public final class MapsSearchAsyncClient {
 
     /**
      * Returns a batch of previously searched addressed given a batch id.
+     * <!-- src_embed com.azure.maps.search.async.reverse_search_address_batch  -->
+     * <pre>
+     * List&lt;ReverseSearchAddressOptions&gt; list2 = new ArrayList&lt;&gt;&#40;&#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;2.294911, 48.858561&#41;&#41;&#41;;
+     * list2.add&#40;
+     *     new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.127896, 47.639765&#41;&#41;
+     *         .setRadiusInMeters&#40;5000&#41;
+     * &#41;;
+     * list2.add&#40;new ReverseSearchAddressOptions&#40;new GeoPosition&#40;-122.348170, 47.621028&#41;&#41;&#41;;
+     *
+     * System.out.println&#40;&quot;Reverse Search Address Batch Async&quot;&#41;;
+     * BatchReverseSearchResult batchReverseSearchResult =
+     *     asyncClient.beginReverseSearchAddressBatch&#40;list2&#41;.getSyncPoller&#40;&#41;.getFinalResult&#40;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;&#41;;
+     * MapsCommon.print&#40;batchReverseSearchResult.getBatchItems&#40;&#41;.get&#40;0&#41;.getResult&#40;&#41;.getAddresses&#40;&#41;.get&#40;0&#41;.getAddress&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.reverse_search_address_batch -->
      *
      * @param batchId Batch id for querying the operation.
      * @param context a {@link Context} object for distributed tracing.

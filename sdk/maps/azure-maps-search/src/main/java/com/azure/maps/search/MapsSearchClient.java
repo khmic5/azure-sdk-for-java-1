@@ -66,6 +66,21 @@ public final class MapsSearchClient {
 
     /**
      * List Polygons
+     * <!-- src_embed com.azure.maps.search.sync.get_polygon -->
+     * <pre>
+     * List&lt;String&gt; ids = results.getResults&#40;&#41;.stream&#40;&#41;
+     *     .filter&#40;item -&gt; item.getDataSource&#40;&#41; != null &amp;&amp; item.getDataSource&#40;&#41;.getGeometry&#40;&#41; != null&#41;
+     *     .map&#40;item -&gt; item.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;&#41;
+     *     .collect&#40;Collectors.toList&#40;&#41;&#41;;
+     * ids.add&#40;id&#41;;
+     *
+     * if &#40;ids != null &amp;&amp; !ids.isEmpty&#40;&#41;&#41; &#123;
+     *     System.out.println&#40;&quot;Get Polygon: &quot; + ids&#41;;
+     *     MapsCommon.print&#40;client.getPolygons&#40;ids&#41;&#41;;
+     *     MapsCommon.print&#40;client.getPolygonsWithResponse&#40;ids, null&#41;.getValue&#40;&#41;.getClass&#40;&#41;&#41;;
+     * &#125;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.get_polygon -->
      *
      * @param geometryIds Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -80,6 +95,21 @@ public final class MapsSearchClient {
 
     /**
      * List Polygons
+     * <!-- src_embed com.azure.maps.search.sync.get_polygon -->
+     * <pre>
+     * List&lt;String&gt; ids = results.getResults&#40;&#41;.stream&#40;&#41;
+     *     .filter&#40;item -&gt; item.getDataSource&#40;&#41; != null &amp;&amp; item.getDataSource&#40;&#41;.getGeometry&#40;&#41; != null&#41;
+     *     .map&#40;item -&gt; item.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;&#41;
+     *     .collect&#40;Collectors.toList&#40;&#41;&#41;;
+     * ids.add&#40;id&#41;;
+     *
+     * if &#40;ids != null &amp;&amp; !ids.isEmpty&#40;&#41;&#41; &#123;
+     *     System.out.println&#40;&quot;Get Polygon: &quot; + ids&#41;;
+     *     MapsCommon.print&#40;client.getPolygons&#40;ids&#41;&#41;;
+     *     MapsCommon.print&#40;client.getPolygonsWithResponse&#40;ids, null&#41;.getValue&#40;&#41;.getClass&#40;&#41;&#41;;
+     * &#125;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.get_polygon -->
      *
      * @param geometryIds Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.
      * @param context The context to associate with this operation.
@@ -95,6 +125,27 @@ public final class MapsSearchClient {
 
     /**
      * Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.sync.fuzzy_search -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Fuzzy:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;client.fuzzySearch&#40;new FuzzySearchOptions&#40;&quot;starbucks&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with options
+     * SearchAddressResult results = client.fuzzySearch&#40;
+     *     new FuzzySearchOptions&#40;&quot;1 Microsoft Way&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;;
+     * MapsCommon.print&#40;results&#41;;
+     *
+     * &#47;&#47; with response
+     * Response&lt;SearchAddressResult&gt; response = client.fuzzySearchWithResponse&#40;
+     *     new FuzzySearchOptions&#40;&quot;Monaco&quot;&#41;.setEntityType&#40;GeographicEntityType.COUNTRY&#41;
+     *         .setTop&#40;5&#41;, null&#41;;
+     * MapsCommon.print&#40;response.getStatusCode&#40;&#41;&#41;;
+     * String id = response.getValue&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.fuzzy_search -->
      *
      * @param options {@link FuzzySearchOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -109,6 +160,27 @@ public final class MapsSearchClient {
 
     /**
      * Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.sync.fuzzy_search -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Fuzzy:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;client.fuzzySearch&#40;new FuzzySearchOptions&#40;&quot;starbucks&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with options
+     * SearchAddressResult results = client.fuzzySearch&#40;
+     *     new FuzzySearchOptions&#40;&quot;1 Microsoft Way&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;;
+     * MapsCommon.print&#40;results&#41;;
+     *
+     * &#47;&#47; with response
+     * Response&lt;SearchAddressResult&gt; response = client.fuzzySearchWithResponse&#40;
+     *     new FuzzySearchOptions&#40;&quot;Monaco&quot;&#41;.setEntityType&#40;GeographicEntityType.COUNTRY&#41;
+     *         .setTop&#40;5&#41;, null&#41;;
+     * MapsCommon.print&#40;response.getStatusCode&#40;&#41;&#41;;
+     * String id = response.getValue&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.fuzzy_search -->
      *
      * @param query the query string used in the search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -123,6 +195,27 @@ public final class MapsSearchClient {
 
     /**
      * Fuzzy Search
+     * <!-- src_embed com.azure.maps.search.sync.fuzzy_search -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Fuzzy:&quot;&#41;;
+     *
+     * &#47;&#47; simple
+     * MapsCommon.print&#40;client.fuzzySearch&#40;new FuzzySearchOptions&#40;&quot;starbucks&quot;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with options
+     * SearchAddressResult results = client.fuzzySearch&#40;
+     *     new FuzzySearchOptions&#40;&quot;1 Microsoft Way&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setTop&#40;5&#41;&#41;;
+     * MapsCommon.print&#40;results&#41;;
+     *
+     * &#47;&#47; with response
+     * Response&lt;SearchAddressResult&gt; response = client.fuzzySearchWithResponse&#40;
+     *     new FuzzySearchOptions&#40;&quot;Monaco&quot;&#41;.setEntityType&#40;GeographicEntityType.COUNTRY&#41;
+     *         .setTop&#40;5&#41;, null&#41;;
+     * MapsCommon.print&#40;response.getStatusCode&#40;&#41;&#41;;
+     * String id = response.getValue&#40;&#41;.getResults&#40;&#41;.get&#40;0&#41;.getDataSource&#40;&#41;.getGeometry&#40;&#41;.getId&#40;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.fuzzy_search -->
      *
      * @param options {@link FuzzySearchOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
@@ -138,6 +231,28 @@ public final class MapsSearchClient {
 
     /**
      * Search Point of Interest
+     * <!-- src_embed com.azure.maps.search.sync.get_search_poi -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Points of Interest:&quot;&#41;;
+     *
+     * &#47;&#47; coordinates
+     * MapsCommon.print&#40;client.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;client.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;client.searchPointOfInterestWithResponse&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.get_search_poi -->
      *
      * @param options {@link SearchPointOfInterestOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -152,6 +267,28 @@ public final class MapsSearchClient {
 
      /**
      * Search Point of Interest
+     * <!-- src_embed com.azure.maps.search.sync.get_search_poi -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Points of Interest:&quot;&#41;;
+     *
+     * &#47;&#47; coordinates
+     * MapsCommon.print&#40;client.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;client.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;client.searchPointOfInterestWithResponse&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.get_search_poi -->
      *
      * @param query The query to be used to search for points of interest.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -166,6 +303,28 @@ public final class MapsSearchClient {
 
     /**
      * Search Point of Interest
+     * <!-- src_embed com.azure.maps.search.sync.get_search_poi -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Points of Interest:&quot;&#41;;
+     *
+     * &#47;&#47; coordinates
+     * MapsCommon.print&#40;client.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;&#41;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;client.searchPointOfInterest&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;client.searchPointOfInterestWithResponse&#40;
+     *     new SearchPointOfInterestOptions&#40;&quot;pizza&quot;, new GeoPosition&#40;-121.97483, 36.98844&#41;&#41;
+     *         .setTop&#40;10&#41;
+     *         .setOperatingHours&#40;OperatingHoursRange.NEXT_SEVEN_DAYS&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.get_search_poi -->
      *
      * @param options {@link SearchPointOfInterestOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
@@ -182,6 +341,24 @@ public final class MapsSearchClient {
 
     /**
      * Search Nearby Point of Interest
+     * <!-- src_embed com.azure.maps.search.sync.search_nearby -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Nearby:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;client.searchNearbyPointOfInterest&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;&#41;;
+     *
+     * &#47;&#47; response
+     * MapsCommon.print&#40;client.searchNearbyPointOfInterestWithResponse&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_nearby -->
      *
      * @param options {@link SearchNearbyPointsOfInterestOptions} the options to be used in this search.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -196,6 +373,24 @@ public final class MapsSearchClient {
 
     /**
      * Search Nearby Point of Interest
+     * <!-- src_embed com.azure.maps.search.sync.search_nearby -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Nearby:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;client.searchNearbyPointOfInterest&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;&#41;;
+     *
+     * &#47;&#47; response
+     * MapsCommon.print&#40;client.searchNearbyPointOfInterestWithResponse&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_nearby -->
      *
      * @param query A pair of coordinates for query.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -210,6 +405,24 @@ public final class MapsSearchClient {
 
     /**
      * Search Nearby Point of Interest
+     * <!-- src_embed com.azure.maps.search.sync.search_nearby -->
+     * <pre>
+     * System.out.println&#40;&quot;Search Nearby:&quot;&#41;;
+     *
+     * &#47;&#47; options
+     * MapsCommon.print&#40;client.searchNearbyPointOfInterest&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;&#41;&#41;;
+     *
+     * &#47;&#47; response
+     * MapsCommon.print&#40;client.searchNearbyPointOfInterestWithResponse&#40;
+     *     new SearchNearbyPointsOfInterestOptions&#40;new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCountryFilter&#40;Arrays.asList&#40;&quot;US&quot;&#41;&#41;
+     *         .setTop&#40;10&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_nearby -->
      *
      * @param options {@link SearchNearbyPointsOfInterestOptions} the options to be used in this search.
      * @param context The context to associate with this operation.
@@ -226,6 +439,24 @@ public final class MapsSearchClient {
 
     /**
      * Search Point of Interest per Category
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Point of Interest Category:&quot;&#41;;
+     *
+     * &#47;&#47; complete - search for italian restaurant in NYC
+     * MapsCommon.print&#40;client.searchPointOfInterestCategory&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;client.searchPointOfInterestCategoryWithResponse&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category -->
      *
      * @param options a {@link SearchPointOfInterestCategoryOptions} representing the search parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -240,6 +471,24 @@ public final class MapsSearchClient {
 
     /**
      * Search Point of Interest per Category
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Point of Interest Category:&quot;&#41;;
+     *
+     * &#47;&#47; complete - search for italian restaurant in NYC
+     * MapsCommon.print&#40;client.searchPointOfInterestCategory&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;client.searchPointOfInterestCategoryWithResponse&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category -->
      *
      * @param query The query to be used to search for points of interest.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -254,6 +503,24 @@ public final class MapsSearchClient {
 
     /**
      * Search Point of Interest per Category
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Point of Interest Category:&quot;&#41;;
+     *
+     * &#47;&#47; complete - search for italian restaurant in NYC
+     * MapsCommon.print&#40;client.searchPointOfInterestCategory&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;&#41;&#41;;
+     *
+     * &#47;&#47; with response
+     * MapsCommon.print&#40;client.searchPointOfInterestCategoryWithResponse&#40;
+     *     new SearchPointOfInterestCategoryOptions&#40;&quot;pasta&quot;, new GeoPosition&#40;-74.011454, 40.706270&#41;&#41;
+     *         .setCategoryFilter&#40;Arrays.asList&#40;7315&#41;&#41;
+     *         .setTop&#40;3&#41;,
+     *     null&#41;.getStatusCode&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category -->
      *
      * @param options a {@link SearchPointOfInterestCategoryOptions} representing the search parameters.
      * @param context The context to associate with this operation.
@@ -270,6 +537,12 @@ public final class MapsSearchClient {
 
     /**
      * Get Point of Interest Category Tree
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category_tree -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Search POI Category Tree:&quot;&#41;;
+     * MapsCommon.print&#40;client.getPointOfInterestCategoryTree&#40;null&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category_tree -->
      *
      * @param language Language in which search results should be returned. Should be one of supported IETF language
      *     tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not
@@ -288,6 +561,12 @@ public final class MapsSearchClient {
 
     /**
      * Get Point of Interest Category Tree
+     * <!-- src_embed com.azure.maps.search.sync.search_poi_category_tree -->
+     * <pre>
+     * System.out.println&#40;&quot;Get Search POI Category Tree:&quot;&#41;;
+     * MapsCommon.print&#40;client.getPointOfInterestCategoryTree&#40;null&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.search_poi_category_tree -->
      *
      * @param language Language in which search results should be returned. Should be one of supported IETF language
      *     tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not
