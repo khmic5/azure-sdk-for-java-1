@@ -79,8 +79,118 @@ See [Authentication][authenticate] for more options.
 See [API design][design] for general introduction on design and key concepts on Azure Management Libraries.
 
 ## Examples
+Begin Request Route Matrix
+```java com.azure.maps.search.sync.begin_request_route_matrix
+System.out.println("Request route matrix");
+RouteMatrixQuery matrixQuery = new RouteMatrixQuery();
 
+// origins
+GeoPointCollection origins = new GeoPointCollection(Arrays.asList(
+    new GeoPoint(52.36006, 4.85106),
+    new GeoPoint(52.36187, 4.85056)
+));
 
+// destinations
+GeoPointCollection destinations = new GeoPointCollection(Arrays.asList(
+    new GeoPoint(52.36241, 4.85003),
+    new GeoPoint(52.50931, 13.42937)
+));
+
+matrixQuery.setDestinations(destinations);
+matrixQuery.setOrigins(origins);
+
+RouteMatrixOptions matrixOptions = new RouteMatrixOptions(matrixQuery);
+MapsCommon.print(client.beginRequestRouteMatrix(matrixOptions).getFinalResult());
+```
+
+Get Route Directions
+```java com.azure.maps.route.sync.get_route_directions
+System.out.println("Get route directions");
+List<GeoPosition> routePoints = Arrays.asList(
+    new GeoPosition(13.42936, 52.50931),
+    new GeoPosition(13.43872, 52.50274));
+RouteDirectionsOptions routeOptions = new RouteDirectionsOptions(routePoints);
+RouteDirections directions = client.getRouteDirections(routeOptions);
+RouteReport report = directions.getReport(); // get the report and use it
+```
+
+Get Route Directions With Parameters
+```java com.azure.maps.route.sync.get_route_directions_parameters
+System.out.println("Get route parameters");
+// supporting points
+GeoCollection supportingPoints = new GeoCollection(
+    Arrays.asList(
+        new GeoPoint(13.42936, 52.5093),
+        new GeoPoint(13.42859, 52.50844)
+        ));
+
+// avoid areas
+List<GeoPolygon> polygons = Arrays.asList(
+    new GeoPolygon(
+        new GeoLinearRing(Arrays.asList(
+            new GeoPosition(-122.39456176757811, 47.489368981370724),
+            new GeoPosition(-122.00454711914061, 47.489368981370724),
+            new GeoPosition(-122.00454711914061, 47.65151268066222),
+            new GeoPosition(-122.39456176757811, 47.65151268066222),
+            new GeoPosition(-122.39456176757811, 47.489368981370724)
+        ))
+    ),
+    new GeoPolygon(
+        new GeoLinearRing(Arrays.asList(
+            new GeoPosition(100.0, 0.0),
+            new GeoPosition(101.0, 0.0),
+            new GeoPosition(101.0, 1.0),
+            new GeoPosition(100.0, 1.0),
+            new GeoPosition(100.0, 0.0)
+        ))
+    )
+);
+GeoPolygonCollection avoidAreas = new GeoPolygonCollection(polygons);
+RouteDirectionsParameters parameters = new RouteDirectionsParameters()
+    .setSupportingPoints(supportingPoints)
+    .setAvoidVignette(Arrays.asList("AUS", "CHE"))
+    .setAvoidAreas(avoidAreas);
+MapsCommon.print(client.getRouteDirections(routeOptions,
+    parameters));
+```
+
+Get Route Range
+```java com.azure.maps.search.sync.route_range
+System.out.println("Get route range");
+RouteRangeOptions rangeOptions = new RouteRangeOptions(new GeoPosition(5.86605, 50.97452), 6000.0);
+MapsCommon.print(client.getRouteRange(rangeOptions));
+```
+
+Begin Request Route Directions Batch
+```java com.azure.maps.search.sync.begin_request_route_directions_batch
+RouteDirectionsOptions options1 = new RouteDirectionsOptions(
+    Arrays.asList(new GeoPosition(-122.128384, 47.639987),
+        new GeoPosition(-122.184408, 47.621252),
+        new GeoPosition(-122.332000, 47.596437)))
+    .setRouteType(RouteType.FASTEST)
+    .setTravelMode(TravelMode.CAR)
+    .setMaxAlternatives(5);
+
+RouteDirectionsOptions options2 = new RouteDirectionsOptions(
+    Arrays.asList(new GeoPosition(-122.348934, 47.620659),
+        new GeoPosition(-122.342015, 47.610101)))
+    .setRouteType(RouteType.ECONOMY)
+    .setTravelMode(TravelMode.BICYCLE)
+    .setUseTrafficData(false);
+
+RouteDirectionsOptions options3 = new RouteDirectionsOptions(
+    Arrays.asList(new GeoPosition(-73.985108, 40.759856),
+        new GeoPosition(-73.973506, 40.771136)))
+    .setRouteType(RouteType.SHORTEST)
+    .setTravelMode(TravelMode.PEDESTRIAN);
+
+System.out.println("Get Route Directions Batch");
+
+List<RouteDirectionsOptions> optionsList = Arrays.asList(options1, options2, options3);
+SyncPoller<RouteDirectionsBatchResult, RouteDirectionsBatchResult> poller =
+    client.beginRequestRouteDirectionsBatch(optionsList);
+MapsCommon.print(poller.getFinalResult());
+```
 
 ## Troubleshooting
 
