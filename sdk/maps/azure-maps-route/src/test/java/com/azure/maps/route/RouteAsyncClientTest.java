@@ -165,7 +165,7 @@ public class RouteAsyncClientTest extends RouteTestBase {
             new GeoPosition(-1000000, 13.42936),
             new GeoPosition(52.50274, 13.43872));
         RouteDirectionsOptions routeOptions = new RouteDirectionsOptions(routePoints);
-        StepVerifier.create(client.getRouteDirectionsWithResponse(routeOptions, null))
+        StepVerifier.create(client.getRouteDirectionsWithContextWithResponse(routeOptions, null))
                 .verifyErrorSatisfies(ex -> {
                     final HttpResponseException httpResponseException = (HttpResponseException) ex;
                     assertEquals(400, httpResponseException.getResponse().getStatusCode());

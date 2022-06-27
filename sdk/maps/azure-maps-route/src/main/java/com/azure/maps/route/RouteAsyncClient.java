@@ -113,6 +113,30 @@ public final class RouteAsyncClient {
 
     /**
      * Request Route Matrix
+     * <!-- src_embed com.azure.maps.search.async.begin_request_route_matrix -->
+     * <pre>
+     * System.out.println&#40;&quot;Request route matrix&quot;&#41;;
+     * RouteMatrixQuery matrixQuery3 = new RouteMatrixQuery&#40;&#41;;
+     *
+     * &#47;&#47; origins
+     * GeoPointCollection origins3 = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36006, 4.85106&#41;,
+     *     new GeoPoint&#40;52.36187, 4.85056&#41;
+     * &#41;&#41;;
+     *
+     * &#47;&#47; destinations
+     * GeoPointCollection destinations3 = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36241, 4.85003&#41;,
+     *     new GeoPoint&#40;52.50931, 13.42937&#41;
+     * &#41;&#41;;
+     *
+     * matrixQuery2.setDestinations&#40;destinations3&#41;;
+     * matrixQuery2.setOrigins&#40;origins3&#41;;
+     *
+     * RouteMatrixOptions matrixOptions2 = new RouteMatrixOptions&#40;matrixQuery3&#41;;
+     * MapsCommon.print&#40;asyncClient.beginRequestRouteMatrix&#40;matrixOptions2&#41;.blockFirst&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.begin_request_route_matrix -->
      *
      * @param options the {@code RouteMatrixOptions} applicable to this query.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -128,6 +152,30 @@ public final class RouteAsyncClient {
 
     /**
      * Request Route Matrix
+     * <!-- src_embed com.azure.maps.search.async.begin_request_route_matrix -->
+     * <pre>
+     * System.out.println&#40;&quot;Request route matrix&quot;&#41;;
+     * RouteMatrixQuery matrixQuery3 = new RouteMatrixQuery&#40;&#41;;
+     *
+     * &#47;&#47; origins
+     * GeoPointCollection origins3 = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36006, 4.85106&#41;,
+     *     new GeoPoint&#40;52.36187, 4.85056&#41;
+     * &#41;&#41;;
+     *
+     * &#47;&#47; destinations
+     * GeoPointCollection destinations3 = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36241, 4.85003&#41;,
+     *     new GeoPoint&#40;52.50931, 13.42937&#41;
+     * &#41;&#41;;
+     *
+     * matrixQuery2.setDestinations&#40;destinations3&#41;;
+     * matrixQuery2.setOrigins&#40;origins3&#41;;
+     *
+     * RouteMatrixOptions matrixOptions2 = new RouteMatrixOptions&#40;matrixQuery3&#41;;
+     * MapsCommon.print&#40;asyncClient.beginRequestRouteMatrix&#40;matrixOptions2&#41;.blockFirst&#40;&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.begin_request_route_matrix -->
      *
      * @param options the {@code RouteMatrixOptions} applicable to this query.
      * @param context the context to associate with this operation.
@@ -209,6 +257,17 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.async.get_route_directions -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route directions&quot;&#41;;
+     * List&lt;GeoPosition&gt; routePoints2 = Arrays.asList&#40;
+     *     new GeoPosition&#40;13.42936, 52.50931&#41;,
+     *     new GeoPosition&#40;13.43872, 52.50274&#41;&#41;;
+     * RouteDirectionsOptions routeOptions2 = new RouteDirectionsOptions&#40;routePoints2&#41;;
+     * RouteDirections directions4 = asyncClient.getRouteDirections&#40;routeOptions2&#41;.block&#40;&#41;;
+     * RouteReport report2 = directions4.getReport&#40;&#41;; &#47;&#47; get the report and use it
+     * </pre>
+     * <!-- end com.azure.maps.route.async.get_route_directions -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -227,6 +286,17 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.async.get_route_directions -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route directions&quot;&#41;;
+     * List&lt;GeoPosition&gt; routePoints2 = Arrays.asList&#40;
+     *     new GeoPosition&#40;13.42936, 52.50931&#41;,
+     *     new GeoPosition&#40;13.43872, 52.50274&#41;&#41;;
+     * RouteDirectionsOptions routeOptions2 = new RouteDirectionsOptions&#40;routePoints2&#41;;
+     * RouteDirections directions4 = asyncClient.getRouteDirections&#40;routeOptions2&#41;.block&#40;&#41;;
+     * RouteReport report2 = directions4.getReport&#40;&#41;; &#47;&#47; get the report and use it
+     * </pre>
+     * <!-- end com.azure.maps.route.async.get_route_directions -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -243,6 +313,17 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.async.get_route_directions -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route directions&quot;&#41;;
+     * List&lt;GeoPosition&gt; routePoints2 = Arrays.asList&#40;
+     *     new GeoPosition&#40;13.42936, 52.50931&#41;,
+     *     new GeoPosition&#40;13.43872, 52.50274&#41;&#41;;
+     * RouteDirectionsOptions routeOptions2 = new RouteDirectionsOptions&#40;routePoints2&#41;;
+     * RouteDirections directions4 = asyncClient.getRouteDirections&#40;routeOptions2&#41;.block&#40;&#41;;
+     * RouteReport report2 = directions4.getReport&#40;&#41;; &#47;&#47; get the report and use it
+     * </pre>
+     * <!-- end com.azure.maps.route.async.get_route_directions -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @param context the context to associate with this operation.
@@ -302,6 +383,46 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.async.get_route_directions_parameters -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route parameters&quot;&#41;;
+     * &#47;&#47; supporting points
+     * GeoCollection supportingPoints2 = new GeoCollection&#40;
+     *     Arrays.asList&#40;
+     *         new GeoPoint&#40;13.42936, 52.5093&#41;,
+     *         new GeoPoint&#40;13.42859, 52.50844&#41;
+     *         &#41;&#41;;
+     *
+     * &#47;&#47; avoid areas
+     * List&lt;GeoPolygon&gt; polygons2 = Arrays.asList&#40;
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;
+     *         &#41;&#41;
+     *     &#41;,
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;100.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 0.0&#41;
+     *         &#41;&#41;
+     *     &#41;
+     * &#41;;
+     * GeoPolygonCollection avoidAreas2 = new GeoPolygonCollection&#40;polygons2&#41;;
+     * RouteDirectionsParameters parameters2 = new RouteDirectionsParameters&#40;&#41;
+     *     .setSupportingPoints&#40;supportingPoints&#41;
+     *     .setAvoidVignette&#40;Arrays.asList&#40;&quot;AUS&quot;, &quot;CHE&quot;&#41;&#41;
+     *     .setAvoidAreas&#40;avoidAreas&#41;;
+     * MapsCommon.print&#40;asyncClient.getRouteDirections&#40;routeOptions2,
+     *     parameters2&#41;.block&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.route.async.get_route_directions_parameters -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @param parameters the {@code RouteDirectionsParameters} applicable to this query
@@ -324,6 +445,46 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.async.get_route_directions_parameters -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route parameters&quot;&#41;;
+     * &#47;&#47; supporting points
+     * GeoCollection supportingPoints2 = new GeoCollection&#40;
+     *     Arrays.asList&#40;
+     *         new GeoPoint&#40;13.42936, 52.5093&#41;,
+     *         new GeoPoint&#40;13.42859, 52.50844&#41;
+     *         &#41;&#41;;
+     *
+     * &#47;&#47; avoid areas
+     * List&lt;GeoPolygon&gt; polygons2 = Arrays.asList&#40;
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;
+     *         &#41;&#41;
+     *     &#41;,
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;100.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 0.0&#41;
+     *         &#41;&#41;
+     *     &#41;
+     * &#41;;
+     * GeoPolygonCollection avoidAreas2 = new GeoPolygonCollection&#40;polygons2&#41;;
+     * RouteDirectionsParameters parameters2 = new RouteDirectionsParameters&#40;&#41;
+     *     .setSupportingPoints&#40;supportingPoints&#41;
+     *     .setAvoidVignette&#40;Arrays.asList&#40;&quot;AUS&quot;, &quot;CHE&quot;&#41;&#41;
+     *     .setAvoidAreas&#40;avoidAreas&#41;;
+     * MapsCommon.print&#40;asyncClient.getRouteDirections&#40;routeOptions2,
+     *     parameters2&#41;.block&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.route.async.get_route_directions_parameters -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @param parameters the {@code RouteDirectionsParameters} applicable to this query
@@ -341,6 +502,46 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.async.get_route_directions_parameters -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route parameters&quot;&#41;;
+     * &#47;&#47; supporting points
+     * GeoCollection supportingPoints2 = new GeoCollection&#40;
+     *     Arrays.asList&#40;
+     *         new GeoPoint&#40;13.42936, 52.5093&#41;,
+     *         new GeoPoint&#40;13.42859, 52.50844&#41;
+     *         &#41;&#41;;
+     *
+     * &#47;&#47; avoid areas
+     * List&lt;GeoPolygon&gt; polygons2 = Arrays.asList&#40;
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;
+     *         &#41;&#41;
+     *     &#41;,
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;100.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 0.0&#41;
+     *         &#41;&#41;
+     *     &#41;
+     * &#41;;
+     * GeoPolygonCollection avoidAreas2 = new GeoPolygonCollection&#40;polygons2&#41;;
+     * RouteDirectionsParameters parameters2 = new RouteDirectionsParameters&#40;&#41;
+     *     .setSupportingPoints&#40;supportingPoints&#41;
+     *     .setAvoidVignette&#40;Arrays.asList&#40;&quot;AUS&quot;, &quot;CHE&quot;&#41;&#41;
+     *     .setAvoidAreas&#40;avoidAreas&#41;;
+     * MapsCommon.print&#40;asyncClient.getRouteDirections&#40;routeOptions2,
+     *     parameters2&#41;.block&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.route.async.get_route_directions_parameters -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @param parameters the {@code RouteDirectionsParameters} applicable to this query
@@ -404,6 +605,13 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Range
+     * <!-- src_embed com.azure.maps.search.async.route_range -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route range&quot;&#41;;
+     * RouteRangeOptions rangeOptions2 = new RouteRangeOptions&#40;new GeoPosition&#40;5.86605, 50.97452&#41;, 6000.0&#41;;
+     * MapsCommon.print&#40;asyncClient.getRouteRange&#40;rangeOptions2&#41;.block&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.route_range -->
      *
      * @param options the {@code RouteRangeOptions} applicable to this query
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -421,6 +629,13 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Range
+     * <!-- src_embed com.azure.maps.search.async.route_range -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route range&quot;&#41;;
+     * RouteRangeOptions rangeOptions2 = new RouteRangeOptions&#40;new GeoPosition&#40;5.86605, 50.97452&#41;, 6000.0&#41;;
+     * MapsCommon.print&#40;asyncClient.getRouteRange&#40;rangeOptions2&#41;.block&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.route_range -->
      *
      * @param options the {@code RouteRangeOptions} applicable to this query
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -435,6 +650,13 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Range
+     * <!-- src_embed com.azure.maps.search.async.route_range -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route range&quot;&#41;;
+     * RouteRangeOptions rangeOptions2 = new RouteRangeOptions&#40;new GeoPosition&#40;5.86605, 50.97452&#41;, 6000.0&#41;;
+     * MapsCommon.print&#40;asyncClient.getRouteRange&#40;rangeOptions2&#41;.block&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.route_range -->
      *
      * @param options the {@code RouteRangeOptions} applicable to this query
      * @param context the context to associate with this operation.
@@ -489,6 +711,37 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions Batch
+     * <!-- src_embed com.azure.maps.search.async.begin_request_route_directions_batch -->
+     * <pre>
+     * RouteDirectionsOptions options5 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.128384, 47.639987&#41;,
+     *         new GeoPosition&#40;-122.184408, 47.621252&#41;,
+     *         new GeoPosition&#40;-122.332000, 47.596437&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.FASTEST&#41;
+     *     .setTravelMode&#40;TravelMode.CAR&#41;
+     *     .setMaxAlternatives&#40;5&#41;;
+     *
+     * RouteDirectionsOptions options6 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.348934, 47.620659&#41;,
+     *         new GeoPosition&#40;-122.342015, 47.610101&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.ECONOMY&#41;
+     *     .setTravelMode&#40;TravelMode.BICYCLE&#41;
+     *     .setUseTrafficData&#40;false&#41;;
+     *
+     * RouteDirectionsOptions options7 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-73.985108, 40.759856&#41;,
+     *         new GeoPosition&#40;-73.973506, 40.771136&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.SHORTEST&#41;
+     *     .setTravelMode&#40;TravelMode.PEDESTRIAN&#41;;
+     *
+     * System.out.println&#40;&quot;Get Route Directions Batch&quot;&#41;;
+     *
+     * List&lt;RouteDirectionsOptions&gt; optionsList2 = Arrays.asList&#40;options5, options6, options7&#41;;
+     * SyncPoller&lt;RouteDirectionsBatchResult, RouteDirectionsBatchResult&gt; poller2 =
+     *     asyncClient.beginRequestRouteDirectionsBatch&#40;optionsList2&#41;.getSyncPoller&#40;&#41;;
+     * MapsCommon.print&#40;poller2.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.begin_request_route_directions_batch -->
      *
      * @param optionsList the list of {@code RouteDirectionsOptions} used in this query
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -504,6 +757,37 @@ public final class RouteAsyncClient {
 
     /**
      * Get Route Directions Batch
+     * <!-- src_embed com.azure.maps.search.async.begin_request_route_directions_batch -->
+     * <pre>
+     * RouteDirectionsOptions options5 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.128384, 47.639987&#41;,
+     *         new GeoPosition&#40;-122.184408, 47.621252&#41;,
+     *         new GeoPosition&#40;-122.332000, 47.596437&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.FASTEST&#41;
+     *     .setTravelMode&#40;TravelMode.CAR&#41;
+     *     .setMaxAlternatives&#40;5&#41;;
+     *
+     * RouteDirectionsOptions options6 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.348934, 47.620659&#41;,
+     *         new GeoPosition&#40;-122.342015, 47.610101&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.ECONOMY&#41;
+     *     .setTravelMode&#40;TravelMode.BICYCLE&#41;
+     *     .setUseTrafficData&#40;false&#41;;
+     *
+     * RouteDirectionsOptions options7 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-73.985108, 40.759856&#41;,
+     *         new GeoPosition&#40;-73.973506, 40.771136&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.SHORTEST&#41;
+     *     .setTravelMode&#40;TravelMode.PEDESTRIAN&#41;;
+     *
+     * System.out.println&#40;&quot;Get Route Directions Batch&quot;&#41;;
+     *
+     * List&lt;RouteDirectionsOptions&gt; optionsList2 = Arrays.asList&#40;options5, options6, options7&#41;;
+     * SyncPoller&lt;RouteDirectionsBatchResult, RouteDirectionsBatchResult&gt; poller2 =
+     *     asyncClient.beginRequestRouteDirectionsBatch&#40;optionsList2&#41;.getSyncPoller&#40;&#41;;
+     * MapsCommon.print&#40;poller2.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.async.begin_request_route_directions_batch -->
      *
      * @param optionsList the list of {@code RouteDirectionsOptions} used in this query
      * @param context the context to associate with this operation.

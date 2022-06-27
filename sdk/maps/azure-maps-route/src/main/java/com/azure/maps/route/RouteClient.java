@@ -74,6 +74,30 @@ public final class RouteClient {
 
     /**
      * Request Route Matrix
+     * <!-- src_embed com.azure.maps.search.sync.begin_request_route_matrix -->
+     * <pre>
+     * System.out.println&#40;&quot;Request route matrix&quot;&#41;;
+     * RouteMatrixQuery matrixQuery = new RouteMatrixQuery&#40;&#41;;
+     *
+     * &#47;&#47; origins
+     * GeoPointCollection origins = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36006, 4.85106&#41;,
+     *     new GeoPoint&#40;52.36187, 4.85056&#41;
+     * &#41;&#41;;
+     *
+     * &#47;&#47; destinations
+     * GeoPointCollection destinations = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36241, 4.85003&#41;,
+     *     new GeoPoint&#40;52.50931, 13.42937&#41;
+     * &#41;&#41;;
+     *
+     * matrixQuery.setDestinations&#40;destinations&#41;;
+     * matrixQuery.setOrigins&#40;origins&#41;;
+     *
+     * RouteMatrixOptions matrixOptions = new RouteMatrixOptions&#40;matrixQuery&#41;;
+     * MapsCommon.print&#40;client.beginRequestRouteMatrix&#40;matrixOptions&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.begin_request_route_matrix -->
      *
      * @param options the {@code RouteMatrixOptions} applicable to this query.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -88,6 +112,30 @@ public final class RouteClient {
 
     /**
      * Request Route Matrix
+     * <!-- src_embed com.azure.maps.search.sync.begin_request_route_matrix -->
+     * <pre>
+     * System.out.println&#40;&quot;Request route matrix&quot;&#41;;
+     * RouteMatrixQuery matrixQuery = new RouteMatrixQuery&#40;&#41;;
+     *
+     * &#47;&#47; origins
+     * GeoPointCollection origins = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36006, 4.85106&#41;,
+     *     new GeoPoint&#40;52.36187, 4.85056&#41;
+     * &#41;&#41;;
+     *
+     * &#47;&#47; destinations
+     * GeoPointCollection destinations = new GeoPointCollection&#40;Arrays.asList&#40;
+     *     new GeoPoint&#40;52.36241, 4.85003&#41;,
+     *     new GeoPoint&#40;52.50931, 13.42937&#41;
+     * &#41;&#41;;
+     *
+     * matrixQuery.setDestinations&#40;destinations&#41;;
+     * matrixQuery.setOrigins&#40;origins&#41;;
+     *
+     * RouteMatrixOptions matrixOptions = new RouteMatrixOptions&#40;matrixQuery&#41;;
+     * MapsCommon.print&#40;client.beginRequestRouteMatrix&#40;matrixOptions&#41;.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.begin_request_route_matrix -->
      *
      * @param options the {@code RouteMatrixOptions} applicable to this query.
      * @param context the context to associate with this operation.
@@ -137,6 +185,7 @@ public final class RouteClient {
      *
      * <!-- src_embed com.azure.maps.route.sync.get_route_directions -->
      * <pre>
+     * System.out.println&#40;&quot;Get route directions&quot;&#41;;
      * List&lt;GeoPosition&gt; routePoints = Arrays.asList&#40;
      *     new GeoPosition&#40;13.42936, 52.50931&#41;,
      *     new GeoPosition&#40;13.43872, 52.50274&#41;&#41;;
@@ -159,6 +208,17 @@ public final class RouteClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.sync.get_route_directions -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route directions&quot;&#41;;
+     * List&lt;GeoPosition&gt; routePoints = Arrays.asList&#40;
+     *     new GeoPosition&#40;13.42936, 52.50931&#41;,
+     *     new GeoPosition&#40;13.43872, 52.50274&#41;&#41;;
+     * RouteDirectionsOptions routeOptions = new RouteDirectionsOptions&#40;routePoints&#41;;
+     * RouteDirections directions = client.getRouteDirections&#40;routeOptions&#41;;
+     * RouteReport report = directions.getReport&#40;&#41;; &#47;&#47; get the report and use it
+     * </pre>
+     * <!-- end com.azure.maps.route.sync.get_route_directions -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @param context the context to associate with this operation.
@@ -175,6 +235,46 @@ public final class RouteClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.sync.get_route_directions_parameters -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route parameters&quot;&#41;;
+     * &#47;&#47; supporting points
+     * GeoCollection supportingPoints = new GeoCollection&#40;
+     *     Arrays.asList&#40;
+     *         new GeoPoint&#40;13.42936, 52.5093&#41;,
+     *         new GeoPoint&#40;13.42859, 52.50844&#41;
+     *         &#41;&#41;;
+     *
+     * &#47;&#47; avoid areas
+     * List&lt;GeoPolygon&gt; polygons = Arrays.asList&#40;
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;
+     *         &#41;&#41;
+     *     &#41;,
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;100.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 0.0&#41;
+     *         &#41;&#41;
+     *     &#41;
+     * &#41;;
+     * GeoPolygonCollection avoidAreas = new GeoPolygonCollection&#40;polygons&#41;;
+     * RouteDirectionsParameters parameters = new RouteDirectionsParameters&#40;&#41;
+     *     .setSupportingPoints&#40;supportingPoints&#41;
+     *     .setAvoidVignette&#40;Arrays.asList&#40;&quot;AUS&quot;, &quot;CHE&quot;&#41;&#41;
+     *     .setAvoidAreas&#40;avoidAreas&#41;;
+     * MapsCommon.print&#40;client.getRouteDirections&#40;routeOptions,
+     *     parameters&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.route.sync.get_route_directions_parameters -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @param parameters the {@code RouteDirectionsParameters} applicable to this query
@@ -191,6 +291,46 @@ public final class RouteClient {
 
     /**
      * Get Route Directions
+     * <!-- src_embed com.azure.maps.route.sync.get_route_directions_parameters -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route parameters&quot;&#41;;
+     * &#47;&#47; supporting points
+     * GeoCollection supportingPoints = new GeoCollection&#40;
+     *     Arrays.asList&#40;
+     *         new GeoPoint&#40;13.42936, 52.5093&#41;,
+     *         new GeoPoint&#40;13.42859, 52.50844&#41;
+     *         &#41;&#41;;
+     *
+     * &#47;&#47; avoid areas
+     * List&lt;GeoPolygon&gt; polygons = Arrays.asList&#40;
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.489368981370724&#41;,
+     *             new GeoPosition&#40;-122.00454711914061, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.65151268066222&#41;,
+     *             new GeoPosition&#40;-122.39456176757811, 47.489368981370724&#41;
+     *         &#41;&#41;
+     *     &#41;,
+     *     new GeoPolygon&#40;
+     *         new GeoLinearRing&#40;Arrays.asList&#40;
+     *             new GeoPosition&#40;100.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 0.0&#41;,
+     *             new GeoPosition&#40;101.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 1.0&#41;,
+     *             new GeoPosition&#40;100.0, 0.0&#41;
+     *         &#41;&#41;
+     *     &#41;
+     * &#41;;
+     * GeoPolygonCollection avoidAreas = new GeoPolygonCollection&#40;polygons&#41;;
+     * RouteDirectionsParameters parameters = new RouteDirectionsParameters&#40;&#41;
+     *     .setSupportingPoints&#40;supportingPoints&#41;
+     *     .setAvoidVignette&#40;Arrays.asList&#40;&quot;AUS&quot;, &quot;CHE&quot;&#41;&#41;
+     *     .setAvoidAreas&#40;avoidAreas&#41;;
+     * MapsCommon.print&#40;client.getRouteDirections&#40;routeOptions,
+     *     parameters&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.route.sync.get_route_directions_parameters -->
      *
      * @param options the {@code RouteDirectionsOptions} applicable to this query
      * @param parameters the {@code RouteDirectionsParameters} applicable to this query
@@ -209,6 +349,13 @@ public final class RouteClient {
 
     /**
      * Get Route Range
+     * <!-- src_embed com.azure.maps.search.sync.route_range -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route range&quot;&#41;;
+     * RouteRangeOptions rangeOptions = new RouteRangeOptions&#40;new GeoPosition&#40;5.86605, 50.97452&#41;, 6000.0&#41;;
+     * MapsCommon.print&#40;client.getRouteRange&#40;rangeOptions&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.route_range -->
      *
      * @param options the {@code RouteRangeOptions} applicable to this query
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -223,6 +370,13 @@ public final class RouteClient {
 
     /**
      * Get Route Range
+     * <!-- src_embed com.azure.maps.search.sync.route_range -->
+     * <pre>
+     * System.out.println&#40;&quot;Get route range&quot;&#41;;
+     * RouteRangeOptions rangeOptions = new RouteRangeOptions&#40;new GeoPosition&#40;5.86605, 50.97452&#41;, 6000.0&#41;;
+     * MapsCommon.print&#40;client.getRouteRange&#40;rangeOptions&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.route_range -->
      *
      * @param options the {@code RouteRangeOptions} applicable to this query
      * @param context the context to associate with this operation.
@@ -239,6 +393,37 @@ public final class RouteClient {
 
     /**
      * Get Route Directions Batch
+     * <!-- src_embed com.azure.maps.search.sync.begin_request_route_directions_batch -->
+     * <pre>
+     * RouteDirectionsOptions options1 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.128384, 47.639987&#41;,
+     *         new GeoPosition&#40;-122.184408, 47.621252&#41;,
+     *         new GeoPosition&#40;-122.332000, 47.596437&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.FASTEST&#41;
+     *     .setTravelMode&#40;TravelMode.CAR&#41;
+     *     .setMaxAlternatives&#40;5&#41;;
+     *
+     * RouteDirectionsOptions options2 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.348934, 47.620659&#41;,
+     *         new GeoPosition&#40;-122.342015, 47.610101&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.ECONOMY&#41;
+     *     .setTravelMode&#40;TravelMode.BICYCLE&#41;
+     *     .setUseTrafficData&#40;false&#41;;
+     *
+     * RouteDirectionsOptions options3 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-73.985108, 40.759856&#41;,
+     *         new GeoPosition&#40;-73.973506, 40.771136&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.SHORTEST&#41;
+     *     .setTravelMode&#40;TravelMode.PEDESTRIAN&#41;;
+     *
+     * System.out.println&#40;&quot;Get Route Directions Batch&quot;&#41;;
+     *
+     * List&lt;RouteDirectionsOptions&gt; optionsList = Arrays.asList&#40;options1, options2, options3&#41;;
+     * SyncPoller&lt;RouteDirectionsBatchResult, RouteDirectionsBatchResult&gt; poller =
+     *     client.beginRequestRouteDirectionsBatch&#40;optionsList&#41;;
+     * MapsCommon.print&#40;poller.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.begin_request_route_directions_batch -->
      *
      * @param optionsList the list of {@code RouteDirectionsOptions} used in this query
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -254,6 +439,37 @@ public final class RouteClient {
 
     /**
      * Get Route Directions Batch
+     * <!-- src_embed com.azure.maps.search.sync.begin_request_route_directions_batch -->
+     * <pre>
+     * RouteDirectionsOptions options1 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.128384, 47.639987&#41;,
+     *         new GeoPosition&#40;-122.184408, 47.621252&#41;,
+     *         new GeoPosition&#40;-122.332000, 47.596437&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.FASTEST&#41;
+     *     .setTravelMode&#40;TravelMode.CAR&#41;
+     *     .setMaxAlternatives&#40;5&#41;;
+     *
+     * RouteDirectionsOptions options2 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-122.348934, 47.620659&#41;,
+     *         new GeoPosition&#40;-122.342015, 47.610101&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.ECONOMY&#41;
+     *     .setTravelMode&#40;TravelMode.BICYCLE&#41;
+     *     .setUseTrafficData&#40;false&#41;;
+     *
+     * RouteDirectionsOptions options3 = new RouteDirectionsOptions&#40;
+     *     Arrays.asList&#40;new GeoPosition&#40;-73.985108, 40.759856&#41;,
+     *         new GeoPosition&#40;-73.973506, 40.771136&#41;&#41;&#41;
+     *     .setRouteType&#40;RouteType.SHORTEST&#41;
+     *     .setTravelMode&#40;TravelMode.PEDESTRIAN&#41;;
+     *
+     * System.out.println&#40;&quot;Get Route Directions Batch&quot;&#41;;
+     *
+     * List&lt;RouteDirectionsOptions&gt; optionsList = Arrays.asList&#40;options1, options2, options3&#41;;
+     * SyncPoller&lt;RouteDirectionsBatchResult, RouteDirectionsBatchResult&gt; poller =
+     *     client.beginRequestRouteDirectionsBatch&#40;optionsList&#41;;
+     * MapsCommon.print&#40;poller.getFinalResult&#40;&#41;&#41;;
+     * </pre>
+     * <!-- end com.azure.maps.search.sync.begin_request_route_directions_batch -->
      *
      * @param optionsList the list of {@code RouteDirectionsOptions} used in this query
      * @param context the context to associate with this operation.
